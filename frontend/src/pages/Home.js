@@ -1,9 +1,11 @@
 import React from "react";
 
+import FileInput from "../components/FileInput";
+
 export default function Home() {
     return (
         <div>
-            This is the Home page.
+            <FileInput />
         </div>
     );
 }
