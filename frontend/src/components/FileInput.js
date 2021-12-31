@@ -1,7 +1,7 @@
 import { FormHelperText } from '@material-ui/core';
 import React, { useState, useRef, useEffect } from 'react';
 import upload from "../pics/upload.png";
-// import Typography from "@material-ui/core/Typography";
+import Typography from '@mui/material/Typography';
 
 
 export default function FileInput(props) {
@@ -10,15 +10,15 @@ export default function FileInput(props) {
     const fileInput = useRef(null);
 
     var style1 = {
-        width: "30%",
-        height: "420px",
+        width: "200px",
+        height: "200px",
         color: "black",
-        border: "#B272CE solid 8px",
+        // border: "#B272CE solid 8px",
         borderRadius: "3px",
-        boxShadow: "3px 3px 3px #b4beb7",
+        // boxShadow: "3px 3px 3px #b4beb7",
         margin: "0 auto",
-        marginTop: "100px",
-        backgroundColor: "rgba(255,255,255,0.5)",
+        marginTop: "90px",
+        // backgroundColor: "rgba(255,255,255,0.5)",
         backgroundImage: `url(${upload})`,
         backgroundSize: "cover",
     }
@@ -43,28 +43,31 @@ export default function FileInput(props) {
     };
 
     return (
-        <div
-            className="image-input"
-            onClick={openFileInput}
-            style={style1}
-        >
+        <div>
+            <Typography>Upload a photo of a memory.</Typography>
+            <div
+                className="image-input"
+                onClick={openFileInput}
+                style={style1}
+            >
 
-            <img
-                style={{ height: "100%" }}
-                className="loaded-image"
-                src={src}
-                alt=""
-            />
-
-            <label>
-                <input
-                    ref={fileInput}
-                    style={{ display: "none" }}
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageSelection}
+                <img
+                    style={{ height: "100%" }}
+                    className="loaded-image"
+                    src={src}
+                    alt=""
                 />
-            </label>
+
+                <label>
+                    <input
+                        ref={fileInput}
+                        style={{ display: "none" }}
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageSelection}
+                    />
+                </label>
+            </div>
         </div>
     );
 }
