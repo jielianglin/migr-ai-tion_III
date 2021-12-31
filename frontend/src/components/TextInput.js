@@ -16,6 +16,7 @@ export default function TextInput() {
                 rows={15}
                 variant="filled"
                 margin="normal"
+                fullWidth="true"
             />
         </div>
     )
