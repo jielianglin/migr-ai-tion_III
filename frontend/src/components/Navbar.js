@@ -6,7 +6,6 @@ import {
     MDBNavbarBrand,
     MDBNavbarToggler,
     MDBNavbarNav,
-    MDBNavbarItem,
     MDBNavbarLink,
     MDBIcon,
     MDBCollapse
@@ -34,7 +33,7 @@ export default function Navbar() {
         <MDBNavbar expand='lg' light style={styles3} >
             <MDBContainer fluid>
                 <MDBNavbarBrand href='/'>
-                    <img src={logo} style={styles1} />
+                    <img src={logo} style={styles1} alt="logo" />
                     <span style={styles2}> MIGR-AI-TION </span>
                 </MDBNavbarBrand>
                 <MDBNavbarToggler
