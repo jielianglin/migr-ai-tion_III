@@ -1,4 +1,5 @@
 import React from 'react';
+import Typography from '@mui/material/Typography';
 import Sketch from 'react-p5';
 
 import FileInput from './FileInput';
@@ -28,6 +29,16 @@ export default function Canvas() {
 
     const [color, setColor] = React.useState(['#B272CE']);
     const [canvasImage, setCanvasImage] = React.useState(null);
+
+    var style1 = {
+        backgroundColor: "#D9CDBC",
+        border: "1px solid #E6DAC8",
+        borderRadius: "3px",
+        // boxShadow: "3px 3px 3px #b4beb7",
+        padding: "10px",
+        maxWidth: "500px",
+        height: "auto"
+    }
 
     function setup(p5, canvasParentRef) {
         cnv = p5.createCanvas(600, 600).parent(canvasParentRef);
@@ -102,8 +113,14 @@ export default function Canvas() {
     if (canvasImage) {
         return (
             <div>
-                <br />
-                <div style={{ backgroundColor: "#FFFFFF", borderRadius: "3px", boxShadow: "3px 3px 3px #b4beb7", padding: "50px", maxWidth: "800px", height: "auto" }}>
+                <Typography> Make a collage using your photograph and our painting tool!
+                    <br />
+                    You can paint some emotions about your memory.
+                    <br />
+                    <br />
+                </Typography>
+
+                <div style={style1}>
                     <Sketch setup={setup} draw={draw}
                     />
                 </div>
@@ -113,7 +130,6 @@ export default function Canvas() {
     } else {
         return (
             <div >
-                <br />
                 <FileInput selectImage={setCanvasImage} />
             </div>
         );
