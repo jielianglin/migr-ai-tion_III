@@ -10,10 +10,16 @@ export default function Home() {
 
     var style1 = {
         margin: "50px",
+
+        "@media(max-width: 576px)": {
+            display: "flex",
+            justifyContent: "center",
+            textAlign: "center"
+        }
     }
 
 
-    var style2 = {
+    var style3 = {
         marginTop: "30px",
         margin: "0auto",
         display: "flex",
@@ -23,20 +29,19 @@ export default function Home() {
     return (
         <div style={style1}>
             <div>
-                <Grid container spacing={1} columns={2}>
-                    <Grid item xs={1}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} md={6}>
                         <Canvas />
                     </Grid>
-                    <Grid item xs={1}>
+                    <Grid item xs={12} md={6}>
                         <TextInput />
                     </Grid>
                 </Grid>
             </div>
 
-            <div style={style2}>
+            <div style={style3}>
                 <SubmitButton />
             </div>
-
         </div >
     );
 }
