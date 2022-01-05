@@ -1,7 +1,7 @@
 import React from "react";
 
-import FileInput from "../components/FileInput";
-import TextInput from "../components/TextInput";
+import Canvas from "../components/Canvas";
+import TextInput from "../components/TextForm";
 import SubmitButton from "../components/SubmitButton";
 
 import Grid from '@mui/material/Grid';
@@ -15,7 +15,6 @@ export default function Home() {
 
     var style2 = {
         marginTop: "30px",
-        display: "block",
         margin: "0auto",
         display: "flex",
         justifyContent: "center",
@@ -26,7 +25,7 @@ export default function Home() {
             <div>
                 <Grid container spacing={1} columns={2}>
                     <Grid item xs={1}>
-                        <FileInput />
+                        <Canvas />
                     </Grid>
                     <Grid item xs={1}>
                         <TextInput />

@@ -1,4 +1,3 @@
-import { FormHelperText } from '@material-ui/core';
 import React, { useState, useRef, useEffect } from 'react';
 import upload from "../pics/upload.png";
 import Typography from '@mui/material/Typography';
@@ -32,11 +31,11 @@ export default function FileInput(props) {
         reader.readAsDataURL(file);
     };
 
-    // useEffect((event) => {
-    //     if (src) {
-    //         props.selectImage(src);
-    //     }
-    // }, [src]);
+    useEffect((event) => {
+        if (src) {
+            props.selectImage(src);
+        }
+    }, [src]);
 
     const openFileInput = () => {
         fileInput.current.click();
