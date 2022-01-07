@@ -1,37 +1,23 @@
 import React from "react";
-import axios from "axios";
 
-import Canvas from "../components/Canvas";
-import TextForm from "../components/TextForm";
+// import UploadForm from "../components/UploadForm";
+
+import upload from "../pics/upload.png";
+import discovery from "../pics/discovery.png";
 
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { ThemeProvider } from '@miu/material/style';
 import Typography from '@mui/material/Typography';
+import { flexbox } from "@mui/system";
+
+// import { ThemeProvider } from '@miu/material/style';
+// import Typography from '@mui/material/Typography';
 
 export default function Home() {
-    const [post, setPost] = React.useState(false);
-
-    const [image, setImage] = React.useState(null);
-    // const [tags, setTags] = React.useState([]);
-    const [text, setText] = React.useState(null);
-
-    const [progress, setProgress] = React.useState(false);
-
-    // const [src, setSrc] = React.useState(null);
-    // const [returnTags, setReturnTags] = React.useState([]);
-    // const [returnCaption, setReturnCaption] = React.useState(null);
-    // const [returnAITags, setReturnAITags] = React.useState([]);
 
     var style1 = {
         margin: "50px",
-
-        "@media(max-width: 576px)": {
-            display: "flex",
-            justifyContent: "center",
-            textAlign: "center"
-        }
     }
 
     var style2 = {
@@ -53,88 +39,50 @@ export default function Home() {
     }
 
     var style5 = {
+        maxWidth: '250px',
+    }
+
+    var style6 = {
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "right",
     }
 
-    const theme = createMuiTheme({
-        palette: {
-            primary: {
-                main: "#B272CE",
-            },
-        }
-    });
-
-    const selectedImage = (img) => {
-        setImage(img);
-    };
-
-    const enteredText = (text) => {
-        setText(text);
-    };
-    // const selectedTags = (tags) => {
-    //     setTags(tags);
-    // };
-
-    async function postData() {
-        setProgress(true);
-        // console.log(tags);
-        // console.log(tags.join(","));
-        let formData = new FormData();
-        formData.append("file", image);
-        formData.append("text", text);
-        // formData.append("tags", tags.join(","));
-        let response = await axios.post("http://localhost:8000/images", formData);
-        // props.newTitle();
-        setSrc(`http://localhost:8000/images/${response.data.id}.jpeg`);
-        console.log(response.data.text);
-        // setReturnCaption(response.data.caption);
-        // console.log(response.data.tags);
-        // setReturnTags(response.data.tags);
-        // console.log(response.data.ai_tags);
-        // setReturnAITags(response.data.ai_tags || []);
-        setPost(true);
-        setProgress(false);
+    var style7 = {
+        display: "flex",
+        justifyContent: "left",
     }
-
-    if (post) {
-        return (
+    return (
+        <div style={style1}>
             <div>
-                <Typography> Success!</Typography>
-                <div style={style5}>
-                    <img src={src} alt="" class="returnImg" />
-                </div>
-                <Stack spacing={2} direction="column" style={style3}>
-                    <Button variant="contained" style={style4}>  Back to Home </Button>
-                    <Button variant="contained" style={style4}>  Go to the Gallery  </Button>
-                    <Button variant="contained" style={style4}>  See Data Analysis  </Button>
-                </Stack>
-
-            </div>
-        );
-    } else {
-        return (
-            <div style={style1}>
-                <div>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} md={6}>
-                            <Canvas selectedImage={selectedImage} />
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <TextForm enteredText={enteredText} />
-                        </Grid>
+                <Grid container spacing={0} alignItems="center">
+                    <Grid item xs={12} md={6} justifyContent="center" style={style6} >
+                        <img src={upload} alt="upload" style={style5} />
                     </Grid>
-                </div>
+                    <Grid item xs={12} md={6} style={style7}>
+                        <img src={discovery} alt="discovery" style={style5} />
+                    </Grid>
+                </Grid>
+            </div>
+            <br />
+            <div>
+                <Typography >
+                    We are using Expressive-Arts Therapy and Applied Visual Anthropology techniques to collect an anti-colonial dataset about migration.
+                    The purpose is to inform the public, AI researchers and businesses about the importance of representing the diverse experiences of those on the
+                    margins in the development of emerging technologies. Through our User Research, we designed and developed a special image-annotation tool for
+                    communicating migrant experiences, as a way of disseminating personal and collective healing strategies.
+                    <br />
+                    <br />
+                    Some migration themes that we care about are {""}
+                    <b>#home</b>, <b>#solidarity</b> and <b>#well-being</b>!
+                </Typography>
+            </div>
+            <div style={style2}>
+                <Stack spacing={2} direction="column" style={style3}>
+                    <Button variant="contained" style={style4}>  Join Our Newsletter!  </Button>
+                    <Button variant="contained" style={style4}>  Make a Donation!  </Button>
+                </Stack>
+            </div>
+        </div >
 
-                <div style={style2}>
-                    <Stack spacing={2} direction="row" style={style3}>
-                        <Button variant="contained" style={style4} onClick={postData}>  Submit  </Button>
-                        <ThemeProvider theme={theme}>
-                            {progress && <CircularProgress />}
-                        </ThemeProvider>
-                    </Stack>
-                </div>
-            </div >
-        );
-    }
+    );
 }

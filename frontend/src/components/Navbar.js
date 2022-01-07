@@ -12,6 +12,7 @@ import {
 } from 'mdb-react-ui-kit';
 
 import logo from "../pics/logo.png"
+import './Navbar.css';
 
 export default function Navbar() {
     const [showNavSecond, setShowNavSecond] = useState(false);
@@ -23,18 +24,19 @@ export default function Navbar() {
 
     var styles2 = {
         fontSize: '24px',
-        padding: '10px'
+        padding: '10px',
     }
 
     var styles3 = {
         boxShadow: 'none',
     }
+
     return (
         <MDBNavbar expand='lg' light style={styles3} >
             <MDBContainer fluid>
                 <MDBNavbarBrand href='/'>
                     <img src={logo} style={styles1} alt="logo" />
-                    <span style={styles2}> MIGR-AI-TION </span>
+                    <span style={styles2} class="hide"> MIGR-AI-TION </span>
                 </MDBNavbarBrand>
                 <MDBNavbarToggler
                     aria-expanded='false'
