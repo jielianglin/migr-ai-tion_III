@@ -47,11 +47,11 @@ export default function Navbar() {
                 </MDBNavbarToggler>
                 <MDBCollapse navbar show={showNavSecond}>
                     <MDBNavbarNav>
-                        <MDBNavbarLink active aria-current='page' href='/Gallery'>
+                        {/* <MDBNavbarLink active aria-current='page' href='/Gallery'>
                             Gallery
-                        </MDBNavbarLink>
+                        </MDBNavbarLink> */}
                         <MDBNavbarLink href='/Blog'>Blog</MDBNavbarLink>
-                        <MDBNavbarLink href='/About'>About Us</MDBNavbarLink>
+                        <MDBNavbarLink href='/About'>About</MDBNavbarLink>
                         <MDBNavbarLink href='/Contact'>Contact</MDBNavbarLink>
                     </MDBNavbarNav>
                 </MDBCollapse>

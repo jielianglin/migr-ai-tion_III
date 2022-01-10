@@ -1,14 +1,15 @@
 import React from "react";
 import axios from "axios";
 
-import Canvas from "../components/Canvas";
-import TextForm from "../components/TextForm";
+import Canvas from "./Canvas";
+import TextForm from "./TextForm";
 
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { ThemeProvider } from '@miu/material/style';
+import { ThemeProvider, useTheme } from '@mui/styles';
 import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function Home() {
     const [post, setPost] = React.useState(false);
@@ -16,7 +17,7 @@ export default function Home() {
     const [image, setImage] = React.useState(null);
     // const [tags, setTags] = React.useState([]);
     const [text, setText] = React.useState(null);
-
+    const [src, setSrc] = React.useState(null);
     const [progress, setProgress] = React.useState(false);
 
     // const [src, setSrc] = React.useState(null);
@@ -51,7 +52,7 @@ export default function Home() {
         justifyContent: "center",
     }
 
-    const theme = createMuiTheme({
+    const theme = useTheme({
         palette: {
             primary: {
                 main: "#B272CE",

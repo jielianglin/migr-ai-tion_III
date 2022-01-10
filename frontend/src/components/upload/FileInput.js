@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import upload from "../pics/upload.png";
+import upload from "../../pics/upload.png";
 import Typography from '@mui/material/Typography';
 
 

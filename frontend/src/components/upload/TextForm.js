@@ -1,11 +1,11 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { ThemeProvider, useTheme } from '@mui/styles';
 
 
 export default function TextForm() {
-    const theme = createTheme({
+    const theme = useTheme({
         palette: {
             primary: {
                 main: "#B272CE",

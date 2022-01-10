@@ -5,8 +5,8 @@ import Sketch from 'react-p5';
 import FileInput from './FileInput';
 import Palette from './Palette';
 
-import EraserIcon from '../pics/EraserIcon.png';
-import CheckMark from '../pics/CheckMark.png';
+import EraserIcon from '../../pics/EraserIcon.png';
+import CheckMark from '../../pics/CheckMark.png';
 
 
 var slider;
