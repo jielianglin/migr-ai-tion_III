@@ -14,6 +14,8 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+import "./Home.css";
+
 // import { ThemeProvider } from '@miu/material/style';
 
 export default function Home() {
@@ -85,10 +87,10 @@ export default function Home() {
                     <div>
                         <Grid container spacing={0}>
                             <Grid item xs={12} md={6} style={style6} >
-                                <button style={style8} onClick={showUpload}><img src={upload} alt="upload" style={style5} /> </button>
+                                <button style={style8} onClick={showUpload}><img src={upload} alt="upload" style={style5} class="uploadIcon" /> </button>
                             </Grid>
                             <Grid item xs={12} md={6} style={style7}>
-                                <button style={style8} onClick={showDiscovery}><img src={discovery} alt="discovery" style={style5} /> </button>
+                                <button style={style8} onClick={showDiscovery}><img src={discovery} alt="discovery" style={style5} class="discoveryIcon" /> </button>
                             </Grid>
                         </Grid>
                     </div>
@@ -107,23 +109,23 @@ export default function Home() {
                     <Grid container spacing={2} style={style2}>
                         <Grid item xs={12} md={4} style={style9}>
                             <button style={style8}>
-                                <img src={HomeIcon} alt="upload" />
+                                <img src={HomeIcon} alt="#Home" class="homeIcon" />
                                 <br />
                                 <Typography>#Home</Typography>
                             </button>
                         </Grid>
                         <Grid item xs={12} md={4} style={style9}>
                             <button style={style8}>
-                                <img src={SolidarityIcon} alt="discovery" />
+                                <img src={SolidarityIcon} alt="#Solidarity" class="solidarityIcon" />
                                 <br />
                                 <Typography>#Solidarity</Typography>
                             </button>
                         </Grid>
                         <Grid item xs={12} md={4} style={style9}>
                             <button style={style8}>
-                                <img src={WellBeingIcon} alt="discovery" />
+                                <img src={WellBeingIcon} alt="#Well-being" class="wellBeingIcon" />
                                 <br />
-                                <Typography>#WellBeing</Typography>
+                                <Typography>#Well-being</Typography>
                             </button>
                         </Grid>
                     </Grid>

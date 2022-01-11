@@ -1,0 +1,19 @@
+@media (max-width: 576px){
+    .uploadIcon {
+        width: 130px; 
+    }
+    .discoveryIcon {
+        width: 130px; 
+    }
+    .homeIcon {
+        width: 80px;
+    }
+    .solidarityIcon {
+        width: 80px;
+        padding-top: 10px; 
+    }
+    .wellBeingIcon {
+        width: 80px;
+        padding-top: 10px; 
+    }
+}
