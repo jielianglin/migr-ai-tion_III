@@ -191,7 +191,7 @@ export default function Home() {
                         <Typography >
                             We are using <b>Expressive-Arts Therapy</b> and <b>Applied Visual Anthropology</b> techniques to collect an anti-colonial dataset about migration.
                             The purpose is to inform the public, AI researchers and businesses about the importance of representing the diverse experiences in the development of emerging technologies. Through our <b>User Research</b>, we designed and developed a special image-annotation tool for
-                            communicating migrant experiences, as a way of disseminating personal and collective healing paradigms.
+                            communicating migrant experiences, as a way of sharing intercultural knowledge and disseminating personal and collective ways for healing.
                             <br />
                             <br />
                             {/* Some migration themes that we care about are {""}
