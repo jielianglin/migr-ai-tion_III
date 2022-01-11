@@ -97,7 +97,7 @@ export default function Home() {
             <div>
                 <Typography> Success!</Typography>
                 <div style={style5}>
-                    <img src={src} alt="" class="returnImg" />
+                    <img src={src} alt="" className="returnImg" />
                 </div>
                 <Stack spacing={2} direction="column" style={style3}>
                     <Button variant="contained" style={style4}>  Back to Home </Button>
