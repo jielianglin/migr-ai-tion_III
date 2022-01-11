@@ -25,6 +25,7 @@ export default function Navbar() {
     var styles2 = {
         fontSize: '24px',
         padding: '10px',
+
     }
 
     var styles3 = {
@@ -36,7 +37,7 @@ export default function Navbar() {
             <MDBContainer fluid>
                 <MDBNavbarBrand href='/'>
                     <img src={logo} style={styles1} alt="logo" />
-                    <span style={styles2} class="hide"> MIGR-AI-TION </span>
+                    <span style={styles2} className="hide"> <b>MIGR - AI - TION</b> </span>
                 </MDBNavbarBrand>
                 <MDBNavbarToggler
                     aria-expanded='false'
