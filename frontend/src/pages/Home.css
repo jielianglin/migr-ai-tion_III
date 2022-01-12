@@ -1,3 +1,5 @@
+
+
 @media (max-width: 576px){
     .uploadIcon {
         width: 130px; 
@@ -16,4 +18,6 @@
         width: 80px;
         padding-top: 10px; 
     }
+    
+    
 }
