@@ -242,8 +242,8 @@ export default function Home() {
                     <div>
                         <Typography >
                             We are using <b>Expressive-Arts Therapy</b> and <b>Applied Visual Anthropology</b> techniques to collect an anti-colonial dataset about migration.
-                            The purpose is to inform the public, AI researchers and businesses about the importance of representing the diverse experiences in the development of emerging technologies. Through our <b>User Research</b>, we designed and developed a special image-annotation tool for
-                            communicating migrant experiences, as a way of sharing intercultural knowledge and disseminating personal and collective ways for healing.
+                            The purpose is to inform the public, AI researchers and businesses about the importance of representing the diverse experiences in the development of emerging technologies. Through our <b>User Research</b>, we have designed and developed a special image-annotation tool for
+                            communicating migrant experiences, as a way of sharing intercultural knowledge and disseminating personal and collective tools for healing.
                             {/* <br />
                             <br />
                             <span style={style16}>Some migration topics that we care about are:</span> */}
@@ -263,7 +263,7 @@ export default function Home() {
                                         {homeText && (
                                             <Typography style={style15}>
                                                 <hr />
-                                                We use creative tools to synthesize notions of what <b>#home</b> means for those living in liminal states.
+                                                We use creative and healing tools to synthesize notions of what <b>#home</b> means for those living in liminal states.
                                                 <hr />
                                             </Typography>)}
                                     </div>
@@ -285,7 +285,7 @@ export default function Home() {
 
                                             <Typography style={style15}>
                                                 <hr />
-                                                We highlight issues, such as, migration flows, representation, discrimmination, surveillance and labor under the umbrella of <b> #solidarity</b>
+                                                We highlight issues, such as, migration flows, representation, discrimmination, surveillance and labor under the umbrella of <b> #solidarity</b>.
                                                 <hr />
                                             </Typography>)}
                                     </div>
@@ -306,7 +306,7 @@ export default function Home() {
                                         {wellbeingText && (
                                             <Typography style={style15} onMouseEnter={showWellbeingText} onMouseLeave={hideWellbeingText}>
                                                 <hr />
-                                                We research cultural and individual practices and concepts of <b>#well-being</b> and connect various threads of knowledge to form intercultural models for being well together.
+                                                We research cultural and individual notions and practices of <b>#well-being</b> and connect various threads of knowledge to form intercultural models for being well together.
                                                 <hr />
                                             </Typography>)}
                                     </div>
