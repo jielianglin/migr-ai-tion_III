@@ -1,18 +1,22 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import Chip from "@mui/material/Chip";
+import Avatar from '@mui/material/Avatar';
 import { ThemeProvider, useTheme } from '@mui/styles';
+
 import SelectionHighlighter from 'react-highlight-selection';
+
 
 import './TextForm.css';
 
-var hashtags = [];
-var hashtagswithhash;
+// var hashtags = [];
+
 
 export default function TextForm(props) {
     const [text, setText] = React.useState(null);
     const [highlighter, setHighlighter] = React.useState(false);
-    const [hashtag, setHashtag] = React.useState("");
+    const [hashtag, setHashtag] = React.useState([]);
 
     var style1 = {
         display: "flex",
@@ -36,8 +40,25 @@ export default function TextForm(props) {
 
     var style4 = {
         marginTop: "10px",
-        color: "#B272CE"
     }
+
+    var style5 = {
+        fontSize: '16px',
+        color: "#B272CE",
+        border: "2px solid #B272CE",
+        backgroundColor: "#e6dac8",
+        marginTop: "10px",
+        marginRight: "10px",
+    }
+
+    var style6 = {
+        backgroundColor: "#B272CE",
+        color: "White",
+        paddingTop: "3px",
+        paddingBottom: "3px",
+        // fontStyle: "bold"
+    }
+
     const theme = useTheme({
         palette: {
             primary: {
@@ -53,12 +74,16 @@ export default function TextForm(props) {
     }
 
 
+    const removeTags = (index) => {
+        setHashtag([...hashtag.filter((word) => hashtag.indexOf(word) !== index)]);
+    };
+
     const selectionHandler = (selection) => {
         console.log(selection.selection);
-        setHashtag(hashtag);
-        setHashtag(selection.selection);
-        hashtags.push(selection.selection);
-        console.log("hashtags:" + hashtags);
+        setHashtag([...hashtag, selection.selection]);
+        // setHashtag(selection.selection);
+        // hashtags.push(selection.selection);
+        // console.log("hashtags:" + hashtags);
     }
 
 
@@ -84,7 +109,17 @@ export default function TextForm(props) {
                                 />
                             </div>
                             <div style={style4}>
-                                {hashtags}
+                                {hashtag.map((word, index) => (
+                                    <Chip
+                                        avatar={<Avatar style={style6}><b>#</b></Avatar>}
+                                        className="tags-chip"
+                                        style={style5}
+                                        key={index}
+                                        label={word}
+                                        onDelete={() => removeTags(index)}
+                                        variant="filled"
+                                    />
+                                ))}
                             </div>
                         </div>
                         :
