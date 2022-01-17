@@ -3,22 +3,20 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Chip from "@mui/material/Chip";
 import Avatar from '@mui/material/Avatar';
-// import { ThemeProvider } from '@mui/styles';
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-
-
 import { InteractiveHighlighter } from 'react-interactive-highlighter';
-
 import './TextForm.css';
 
-
-//  var highlights = [];
 
 export default function TextForm(props) {
     const [text, setText] = React.useState(null);
     const [highlighter, setHighlighter] = React.useState(false);
     const [highlights, setHighlights] = React.useState([]);
     const [hashtag, setHashtag] = React.useState([]);
+    const [home, setHome] = React.useState(true);
+    const [solidarity, setSolidarity] = React.useState(true);
+    const [wellbeing, setWellbeing] = React.useState(true);
+
 
     var style1 = {
         display: "flex",
@@ -61,6 +59,13 @@ export default function TextForm(props) {
         // fontStyle: "bold"
     }
 
+    var style7 = {
+        fontSize: '16px',
+        // border: "2px solid white",
+        marginTop: "10px",
+        marginRight: "10px",
+    }
+
     const theme = createTheme({
         palette: {
             primary: {
@@ -81,29 +86,40 @@ export default function TextForm(props) {
 
     const selectionHandler = (selected, startIndex, numChars) => {
         console.log(selected);
-        // setHighlights(highlights);
         setHashtag([...hashtag, selected]);
         highlights.push({ startIndex: startIndex, numChars: numChars });
         setHighlights(highlights);
-        // setHighlights([...highlights, startIndex, numChars]);
-        // highlightedWords.push([selection.selectionStart, selection.selectionEnd]);
-        // console.log(highlightedWords);
     }
-
 
     const enableHighlighter = () => {
         setHighlighter(true);
     }
 
+    const addHomeHashtag = () => {
+        setHome(false);
+        hashtag.push("home");
+        setHashtag(hashtag);
+    };
+
+    const addSolidarityHashtag = () => {
+        setSolidarity(false);
+        hashtag.push("solidarity")
+        setHashtag(hashtag)
+    };
+
+    const addWellbeingHashtag = () => {
+        setWellbeing(false);
+        hashtag.push("well-being")
+        setHashtag(hashtag)
+    };
 
     return (
         <div>
-            <Typography>Write about your memory. Then, highlight the important words.</Typography>
-
 
             <div>
                 {highlighter ?
                     <div>
+                        <Typography>Drag the cursor over the important words to highlight your text.</Typography>
                         <div style={style3}>
                             <InteractiveHighlighter
                                 text={text}
@@ -125,9 +141,43 @@ export default function TextForm(props) {
                                 />
                             ))}
                         </div>
+                        <br />
+                        <br />
+                        <Typography style={style4}>Are any of these themes related to your memory? Click and add.</Typography>
+                        <div style={style4}>
+                            {home &&
+                                <Chip
+
+                                    className="tags-chip"
+                                    label="home"
+                                    style={style7}
+                                    variant="filled"
+                                    onClick={addHomeHashtag}
+                                />}
+
+                            {solidarity &&
+                                <Chip
+                                    className="tags-chip"
+                                    label="solidarity"
+                                    style={style7}
+                                    variant="filled"
+                                    onClick={addSolidarityHashtag}
+                                />}
+
+                            {wellbeing &&
+                                <Chip
+                                    className="tags-chip"
+                                    label="well-being"
+                                    style={style7}
+                                    variant="filled"
+                                    onClick={addWellbeingHashtag}
+                                />}
+
+                        </div>
                     </div>
                     :
                     <div>
+                        <Typography>Write about your memory. Then, highlight the important words.</Typography>
                         <ThemeProvider theme={theme}>
                             <TextField
                                 id="filled-multiline-static"
@@ -138,7 +188,6 @@ export default function TextForm(props) {
                                 margin="normal"
                                 fullWidth="true"
                                 onChange={enteredText}
-
                             />
                         </ThemeProvider>
                         <div style={style1}>
@@ -147,8 +196,6 @@ export default function TextForm(props) {
                     </div>
                 }
             </div>
-
-
         </div>
     )
 }
