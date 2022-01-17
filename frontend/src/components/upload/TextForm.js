@@ -3,7 +3,9 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Chip from "@mui/material/Chip";
 import Avatar from '@mui/material/Avatar';
-import { ThemeProvider, useTheme } from '@mui/styles';
+// import { ThemeProvider } from '@mui/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+
 
 import { InteractiveHighlighter } from 'react-interactive-highlighter';
 
@@ -59,10 +61,10 @@ export default function TextForm(props) {
         // fontStyle: "bold"
     }
 
-    const theme = useTheme({
+    const theme = createTheme({
         palette: {
             primary: {
-                main: "#B272CE",
+                main: '#B272CE',
             },
         },
     });
@@ -97,35 +99,36 @@ export default function TextForm(props) {
     return (
         <div>
             <Typography>Write about your memory. Then, highlight the important words.</Typography>
-            <ThemeProvider theme={theme}>
 
-                <div>
-                    {highlighter ?
-                        <div>
-                            <div style={style3}>
-                                <InteractiveHighlighter
-                                    text={text}
-                                    highlights={highlights}
-                                    selectionHandler={selectionHandler}
-                                    customClass="highlighter-color"
-                                />
-                            </div>
-                            <div style={style4}>
-                                {hashtag.map((word, index) => (
-                                    <Chip
-                                        avatar={<Avatar style={style6}><b>#</b></Avatar>}
-                                        className="tags-chip"
-                                        style={style5}
-                                        key={index}
-                                        label={word}
-                                        onDelete={() => removeTags(index)}
-                                        variant="filled"
-                                    />
-                                ))}
-                            </div>
+
+            <div>
+                {highlighter ?
+                    <div>
+                        <div style={style3}>
+                            <InteractiveHighlighter
+                                text={text}
+                                highlights={highlights}
+                                selectionHandler={selectionHandler}
+                                customClass="highlighter-color"
+                            />
                         </div>
-                        :
-                        <div>
+                        <div style={style4}>
+                            {hashtag.map((word, index) => (
+                                <Chip
+                                    avatar={<Avatar style={style6}><b>#</b></Avatar>}
+                                    className="tags-chip"
+                                    style={style5}
+                                    key={index}
+                                    label={word}
+                                    onDelete={() => removeTags(index)}
+                                    variant="filled"
+                                />
+                            ))}
+                        </div>
+                    </div>
+                    :
+                    <div>
+                        <ThemeProvider theme={theme}>
                             <TextField
                                 id="filled-multiline-static"
                                 label="My Memory"
@@ -135,15 +138,17 @@ export default function TextForm(props) {
                                 margin="normal"
                                 fullWidth="true"
                                 onChange={enteredText}
-                            />
-                            <div style={style1}>
-                                <button style={style2} onClick={enableHighlighter}> Highlight the text >></button>
-                            </div>
-                        </div>
-                    }
-                </div>
 
-            </ThemeProvider>
+                            />
+                        </ThemeProvider>
+                        <div style={style1}>
+                            <button style={style2} onClick={enableHighlighter}> Highlight the text {'>>'}</button>
+                        </div>
+                    </div>
+                }
+            </div>
+
+
         </div>
     )
 }
