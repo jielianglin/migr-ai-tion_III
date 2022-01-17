@@ -5,17 +5,17 @@ import Chip from "@mui/material/Chip";
 import Avatar from '@mui/material/Avatar';
 import { ThemeProvider, useTheme } from '@mui/styles';
 
-import SelectionHighlighter from 'react-highlight-selection';
-
+import { InteractiveHighlighter } from 'react-interactive-highlighter';
 
 import './TextForm.css';
 
-// var hashtags = [];
 
+//  var highlights = [];
 
 export default function TextForm(props) {
     const [text, setText] = React.useState(null);
     const [highlighter, setHighlighter] = React.useState(false);
+    const [highlights, setHighlights] = React.useState([]);
     const [hashtag, setHashtag] = React.useState([]);
 
     var style1 = {
@@ -73,19 +73,20 @@ export default function TextForm(props) {
 
     }
 
-
     const removeTags = (index) => {
         setHashtag([...hashtag.filter((word) => hashtag.indexOf(word) !== index)]);
     };
 
-    const selectionHandler = (selection) => {
-        console.log(selection.selection);
-        setHashtag([...hashtag, selection.selection]);
-        // setHashtag(selection.selection);
-        // hashtags.push(selection.selection);
-        // console.log("hashtags:" + hashtags);
+    const selectionHandler = (selected, startIndex, numChars) => {
+        console.log(selected);
+        // setHighlights(highlights);
+        setHashtag([...hashtag, selected]);
+        highlights.push({ startIndex: startIndex, numChars: numChars });
+        setHighlights(highlights);
+        // setHighlights([...highlights, startIndex, numChars]);
+        // highlightedWords.push([selection.selectionStart, selection.selectionEnd]);
+        // console.log(highlightedWords);
     }
-
 
 
     const enableHighlighter = () => {
@@ -102,8 +103,9 @@ export default function TextForm(props) {
                     {highlighter ?
                         <div>
                             <div style={style3}>
-                                <SelectionHighlighter
+                                <InteractiveHighlighter
                                     text={text}
+                                    highlights={highlights}
                                     selectionHandler={selectionHandler}
                                     customClass="highlighter-color"
                                 />
