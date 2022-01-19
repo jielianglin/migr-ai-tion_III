@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
 
-import Canvas from "./Canvas";
+// import Canvas from "./Canvas";
+import CanvasII from "./CanvasII";
 import TextForm from "./TextForm";
 
 import Grid from '@mui/material/Grid';
@@ -13,7 +14,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 export default function Home() {
     const [post, setPost] = React.useState(false);
-
     const [image, setImage] = React.useState(null);
     // const [tags, setTags] = React.useState([]);
     const [text, setText] = React.useState(null);
@@ -113,7 +113,8 @@ export default function Home() {
                 <div>
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={6}>
-                            <Canvas selectedImage={selectedImage} />
+                            {/* <Canvas selectedImage={selectedImage} /> */}
+                            <CanvasII />
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <TextForm enteredText={enteredText} />
