@@ -172,7 +172,6 @@ export default function TextForm(props) {
                                     variant="filled"
                                     onClick={addWellbeingHashtag}
                                 />}
-
                         </div>
                     </div>
                     :
@@ -191,7 +190,7 @@ export default function TextForm(props) {
                             />
                         </ThemeProvider>
                         <div style={style1}>
-                            <button style={style2} onClick={enableHighlighter}> Highlight the text {'>>'}</button>
+                            <button style={style2} onClick={enableHighlighter} disabled={text === null}> Highlight the text {'>>'}</button>
                         </div>
                     </div>
                 }
