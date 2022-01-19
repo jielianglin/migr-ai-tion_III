@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useCallback } from 'react';
 
 const colors = [
@@ -24,9 +23,15 @@ export default function CanvasII() {
         border: "1px solid #000"
     }
 
+    useEffect(() => {
+        if (canvasRef.current) {
+            ctx.current = canvasRef.current.getContext('2d');
+        }
+    }, [])
 
 
     const draw = useCallback((x, y) => {
+
         if (mouseDown) {
             ctx.current.beginPath();
             ctx.current.strokeStyle = selectedColor;
@@ -40,53 +45,47 @@ export default function CanvasII() {
             setPosition({
                 x,
                 y
-            })
+            });
+
         }
     }, [lastPosition, mouseDown, selectedColor, setPosition])
 
     const download = async () => {
-        const image = canvasRef.current.toDataURL('image/png');
+        const image = canvasRef.current.toDataURL('image.png');
         const blob = await (await fetch(image)).blob();
         const blobURL = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = blobURL;
         link.download = "image.png";
         link.click();
-
-
     }
+
     const clear = () => {
         ctx.current.clearRect(0, 0, ctx.current.canvas.width, ctx.current.canvas.height)
     }
 
-    const onMouseDown = (event) => {
+    const onMouseDown = (e) => {
         setPosition({
-            x: event.pageX,
-            y: event.pageY
+            x: e.nativeEvent.offsetX,
+            y: e.nativeEvent.offsetY
         })
         setMouseDown(true);
     }
 
-    const onMouseUp = (event) => {
+    const onMouseUp = () => {
         setMouseDown(false);
     }
 
     const onMouseMove = (e) => {
-        draw(e.pageX, e.pageY)
+        draw(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
     }
-
-    useEffect(() => {
-        if (canvasRef.current) {
-            ctx.current = canvasRef.current.getContext('2d');
-        }
-    }, [])
 
     return (
         <div>
             <canvas
                 style={style1}
-                width={400}
-                height={400}
+                width={600}
+                height={600}
                 ref={canvasRef}
                 onMouseMove={onMouseMove}
                 onMouseDown={onMouseDown}
@@ -100,11 +99,8 @@ export default function CanvasII() {
                     color => <option key={color} value={color}>{color}</option>
                 )}
             </select>
-
             <button onClick={clear}>Clear</button>
             <button onclick={download}>Download</button>
-
-
         </div>
-    )
+    );
 }
