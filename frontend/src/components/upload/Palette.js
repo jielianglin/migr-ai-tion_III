@@ -16,6 +16,17 @@ let colors = [
     "#6FC5A8",
 ];
 
+var style1 = {
+    display: 'flex',
+    justifyContent: 'center',
+    backgroundColor: '#D1C6B6',
+    paddingTop: '5px',
+    paddingBottom: '5px',
+    marginRight: '132px',
+    marginTop: '20px',
+    borderRadius: '5px'
+
+}
 export default function Palette(props) {
     const [color, setColor] = React.useState("#FFFFFF");
 
@@ -33,20 +44,18 @@ export default function Palette(props) {
 
 
     return (
-        <div>
-            <br />
-            <div style={{ position: 'relative', justifyContent: 'center' }}>
-                <CirclePicker
-                    width="100%"
-                    colors={colors}
-                    color={color}
-                    circleSize={28}
-                    circleSpacing={15}
-                    onSwatchHover={recordColor}
-                    onClick={changeColor}
-                />
-            </div>
-            <br />
+
+        <div style={style1}>
+            <CirclePicker
+                width="100%"
+                colors={colors}
+                color={color}
+                circleSize={28}
+                circleSpacing={15}
+                onSwatchHover={recordColor}
+                onClick={changeColor}
+            />
+
         </div>
     );
 }

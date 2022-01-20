@@ -114,7 +114,7 @@ export default function Home() {
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={6}>
                             {/* <Canvas selectedImage={selectedImage} /> */}
-                            <CanvasII />
+                            <CanvasII selectedImage={selectedImage} />
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <TextForm enteredText={enteredText} />
