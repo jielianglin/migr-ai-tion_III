@@ -18,15 +18,18 @@ let colors = [
 
 var style1 = {
     display: 'flex',
-    justifyContent: 'center',
-    backgroundColor: '#D1C6B6',
+    backgroundColor: "rgba( 255, 255, 255, 0.5)",
+    paddingLeft: '5px',
     paddingTop: '5px',
     paddingBottom: '5px',
-    marginRight: '132px',
+    marginLeft: '30px',
+    marginRight: '50px',
     marginTop: '20px',
-    borderRadius: '5px'
-
+    marginBottom: '25px',
+    borderRadius: '5px',
+    margin: '0 auto'
 }
+
 export default function Palette(props) {
     const [color, setColor] = React.useState("#FFFFFF");
 

@@ -119,7 +119,7 @@ export default function TextForm(props) {
             <div>
                 {highlighter ?
                     <div>
-                        <Typography>Drag the cursor over the important words to highlight your text.</Typography>
+                        <Typography>Highlight the words with your cursor.</Typography>
                         <div style={style3}>
                             <InteractiveHighlighter
                                 text={text}
