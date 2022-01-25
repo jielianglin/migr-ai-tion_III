@@ -17,17 +17,17 @@ let colors = [
 ];
 
 var style1 = {
-    display: 'flex',
+    // display: 'flex',
+    // justifyContent: 'center',
     backgroundColor: "rgba( 255, 255, 255, 0.5)",
-    paddingLeft: '5px',
-    paddingTop: '5px',
-    paddingBottom: '5px',
-    marginLeft: '30px',
-    marginRight: '50px',
-    marginTop: '20px',
-    marginBottom: '25px',
-    borderRadius: '5px',
-    margin: '0 auto'
+    padding: "20px",
+    // marginLeft: '30px',
+    // marginRight: '50px',
+    // marginTop: '10px',
+    // marginBottom: '25px',
+    borderRadius: '25px',
+    // margin: '0 auto',
+    width: "325px"
 }
 
 export default function Palette(props) {
@@ -47,18 +47,19 @@ export default function Palette(props) {
 
 
     return (
+        <div>
+            <div style={style1}>
+                <CirclePicker
+                    width="330px"
+                    colors={colors}
+                    color={color}
+                    circleSize={28}
+                    circleSpacing={23}
+                    onSwatchHover={recordColor}
+                    onClick={changeColor}
+                />
 
-        <div style={style1}>
-            <CirclePicker
-                width="100%"
-                colors={colors}
-                color={color}
-                circleSize={28}
-                circleSpacing={15}
-                onSwatchHover={recordColor}
-                onClick={changeColor}
-            />
-
+            </div>
         </div>
     );
 }

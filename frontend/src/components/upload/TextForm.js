@@ -20,15 +20,15 @@ export default function TextForm(props) {
 
     var style1 = {
         display: "flex",
-        justifyContent: "right",
+        justifyContent: "center",
         marginTop: "10px",
     }
     var style2 = {
-        backgroundColor: "transparent",
-        border: "none",
+        backgroundColor: "rgba( 255, 255, 255, 0.5)",
+        fontSize: "16px",
         color: "#B272CE",
-        textDecoration: 'underline',
-        textStyle: "bold",
+        padding: "25px 10px 25px 10px",
+        margin: "10px"
     }
 
     var style3 = {
@@ -182,7 +182,7 @@ export default function TextForm(props) {
                                 id="filled-multiline-static"
                                 label="My Memory"
                                 multiline={true}
-                                rows={15}
+                                rows={18}
                                 variant="filled"
                                 margin="normal"
                                 fullWidth="true"
@@ -190,7 +190,7 @@ export default function TextForm(props) {
                             />
                         </ThemeProvider>
                         <div style={style1}>
-                            <button style={style2} onClick={enableHighlighter} disabled={text === null}> Highlight the text {'>>'}</button>
+                            <Chip variant="contained" style={style2} onClick={enableHighlighter} disabled={text === null} label="Highlight the text" />
                         </div>
                     </div>
                 }

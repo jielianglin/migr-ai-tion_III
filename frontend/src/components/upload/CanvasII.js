@@ -5,16 +5,17 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
+import Chip from '@mui/material/Chip';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Grid from '@mui/material/Grid';
+
+import RubberIcon from "../../pics/RubberIcon.jpg";
 import Palette from './Palette';
 import FileInput from './FileInput';
 
-const colors = [
-    "red",
-    "green",
-    "yellow",
-    "black",
-    "blue"
-]
+// import "./CanvasII.css"
 
 var image;
 
@@ -30,23 +31,25 @@ export default function CanvasII() {
     });
     const [canvasImage, setCanvasImage] = React.useState(null);
 
+    //canvas
     var style1 = {
-        border: "1px solid #D1C6B6",
-        borderRadius: "5px"
+        border: "2px solid #D1C6B6",
+        borderRadius: "5px",
     }
 
+    //canvas div
     var style2 = {
         display: "flex",
-        justifyContent: "center"
+        justifyContent: "center",
     }
 
-    var style3 = {
-        display: "flex",
-        backgroundColor: "#FFFFFF",
-        color: "#B272CE",
-        borderRadius: "15px",
-        margin: "0 auto"
-    }
+    // var style3 = {
+    //     display: "flex",
+    //     backgroundColor: "#FFFFFF",
+    //     color: "#B272CE",
+    //     borderRadius: "15px",
+    //     margin: "0 auto"
+    // }
 
     // var style4 = {
     //     display: "flex",
@@ -57,41 +60,91 @@ export default function CanvasII() {
     //     margin: "0 auto",
     // }
 
+    //brush size buttons
     var style5 = {
-        display: "inline",
-        padding: "25px",
-
+        display: "flex",
+        justifyContent: "center",
+        padding: "10px 0px 5px 0px",
     }
 
-    var style6 = {
-        display: "inline",
+    //brush size
+    var style4 = {
         backgroundColor: "rgba( 255, 255, 255, 0.5)",
-        padding: "15px 0px 15px 30px",
-        borderRadius: "5px",
-        margin: "30px"
+        padding: "15px",
+        borderRadius: "17px",
+        margin: "10px",
+        width: "140px"
     }
 
+    //brush size text
     var style7 = {
         color: "#B272CE",
-        display: "inline",
+        textAlign: "center",
+        // display: "inline",
     }
 
+    //palette div
     var style8 = {
-        marginTop: "30px",
-        marginBottom: "30px",
+        display: "flex",
+        justifyContent: "center",
+        margin: "10px",
     }
+
+    //opacity div
+    var style6 = {
+        // position: "relative",
+        // top: "20px",
+        backgroundColor: "rgba( 255, 255, 255, 0.5)",
+        padding: "15px 20px 0px 20px",
+        borderRadius: "17px",
+        margin: "10px",
+        width: "140px",
+        height: "90px",
+        textAlign: "center",
+
+    }
+
+    //opacity
     var style9 = {
         color: "#B272CE",
-        display: "inline",
-        padding: "0px 30px 0px 0px",
+        // padding: "5px 30px 0px 0px",
     }
 
+
     var style10 = {
+        // backgroundColor: "rgba( 255, 255, 255, 0.5)",
+        fontSize: "16px",
+        color: "#B272CE",
+        padding: "25px 10px 25px 10px",
+        margin: "10px"
+    }
+
+    //erase and undo
+    var style11 = {
         backgroundColor: "rgba( 255, 255, 255, 0.5)",
-        padding: "15px 0px 5px 30px",
-        borderRadius: "5px",
-        margin: "30px",
-        width: "135px"
+        fontSize: "16px",
+        color: "#B272CE",
+        padding: "25px 10px 25px 10px",
+        margin: "10px"
+    }
+
+    //slider
+    var style12 = {
+        padding: "5px 0px 5px 0px",
+        // margin: "0 auto"
+    }
+
+    //col 2 div - brush size and opacity
+    var style13 = {
+        display: "flex",
+        justifyContent: "center"
+
+    }
+
+    // col 3 div - erase and clear
+    var style14 = {
+        display: "flex",
+        justifyContent: "center"
     }
 
     const theme = createTheme({
@@ -204,37 +257,64 @@ export default function CanvasII() {
                     />
                 </div>
                 <br />
-                <div style={style6}>
-                    <ThemeProvider theme={theme}>
-                        <Typography style={style7}>Brush size:</Typography>
-                        <ButtonGroup variant="text" aria-label="text button group" style={style5}>
-                            <Button>s</Button>
-                            <Button>m</Button>
-                            <Button>l</Button>
-                        </ButtonGroup>
-                    </ThemeProvider>
-                </div>
-                <div style={style10}>
-                    <ThemeProvider theme={theme}>
-                        <Typography style={style9}>Opacity:
-                        </Typography>
-                        <Box width={80}>
-                            <Slider
-                                size="small"
-                                defaultValue={70}
-                                aria-label="Small"
-                                valueLabelDisplay="auto"
-                            />
-                        </Box>
-                    </ThemeProvider>
-                </div>
-                <div style={style8}>
-                    <Palette selectColor={color => setColor(color)} />
-                </div>
-                <Button variant="contained" onClick={clear} style={style3}>Clear Canvas</Button>
-                <br />
-                {/* <Button variant="outlined" onclick={download} style={style4}>Download</Button> */}
-            </div>)
+                <Grid container justifyContent="center" flexDirection="column" alignItems="center"
+                    spacing={0}>
+                    <Grid item xs={11} >
+                        <div className="palette" style={style8}>
+                            <Palette selectColor={color => setColor(color)} />
+                        </div>
+                    </Grid>
+                    <Grid item xs={11} >
+                        <div className="columnTwo" style={style13}>
+                            <div style={style4} className="brushSize">
+                                <ThemeProvider theme={theme}>
+                                    <Typography style={style7}>Brush size:</Typography>
+                                    <ButtonGroup variant="text" aria-label="text button group" style={style5}>
+                                        <Button>s</Button>
+                                        <Button>m</Button>
+                                        <Button>l</Button>
+                                    </ButtonGroup>
+                                </ThemeProvider>
+                            </div>
+                            <div style={style6} className="opacity">
+                                <ThemeProvider theme={theme}>
+                                    <Typography style={style9}>Opacity:
+                                    </Typography>
+                                    <Box width={100} style={style12}>
+                                        <Slider
+                                            size="small"
+                                            defaultValue={70}
+                                            aria-label="Small"
+                                            valueLabelDisplay="auto"
+                                        />
+                                    </Box>
+                                </ThemeProvider>
+                            </div>
+                        </div>
+                    </Grid>
+                    <Grid item xs={11}  >
+                        <div classname="columnThree" style={style14}>
+                            <div className="erase">
+                                <ThemeProvider theme={theme}>
+                                    <Chip style={style11} avatar={<Avatar alt="erase" src={RubberIcon} />} label="Erase" />
+                                </ThemeProvider>
+                            </div>
+                            <div className="undo">
+                                <ThemeProvider theme={theme}>
+                                    <Chip style={style11} icon={<ArrowBackIcon />} label="Undo" />
+                                </ThemeProvider>
+                            </div>
+                        </div>
+                    </Grid>
+                    <Grid item xs={11} md={4} >
+                        <div className="clearCanvas">
+                            <Chip variant="contained" style={style10} onClick={clear} label="Clear Canvas" icon={<DeleteIcon />} />
+                        </div>
+                        {/* <Button variant="outlined" onclick={download} style={style4}>Download</Button> */}
+                    </Grid>
+                </Grid>
+            </div>
+        )
     } else {
         return (
             <div >
