@@ -111,7 +111,7 @@ export default function Home() {
         return (
             <div style={style1}>
                 <div>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={9}>
                         <Grid item xs={12} md={6}>
                             {/* <Canvas selectedImage={selectedImage} /> */}
                             <CanvasII selectedImage={selectedImage} />
