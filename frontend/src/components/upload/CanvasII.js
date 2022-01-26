@@ -19,6 +19,19 @@ import FileInput from './FileInput';
 
 var image;
 
+var transparencyStops = [
+    { "value": 10, "hexValue": "1A" },
+    { "value": 20, "hexValue": "33" },
+    { "value": 30, "hexValue": "33" },
+    { "value": 40, "hexValue": "1A" },
+    { "value": 50, "hexValue": "33" },
+    { "value": 60, "hexValue": "33" },
+    { "value": 70, "hexValue": "33" },
+    { "value": 80, "hexValue": "33" },
+    { "value": 90, "hexValue": "1A" },
+    { "value": 100, "hexValue": "FF" },
+]
+
 export default function CanvasII() {
     const canvasRef = useRef(null);
     const ctx = useRef(null);
@@ -30,7 +43,9 @@ export default function CanvasII() {
         y: 0
     });
     const [canvasImage, setCanvasImage] = React.useState(null);
-    const [brushSize, setBrushSize] = React.useState(25)
+    const [brushSize, setBrushSize] = React.useState(25);
+    const [transparency, setTransparency] = React.useState(null);
+    const [value, setValue] = React.useState(100);
 
     //canvas
     var style1 = {
@@ -185,12 +200,14 @@ export default function CanvasII() {
 
     }, [canvasImage, canvasWidth, canvasHeight])
 
+
+
     const draw = useCallback((x, y) => {
 
         if (mouseDown) {
             ctx.current.beginPath();
-            ctx.current.strokeStyle = color;
-            ctx.current.lineWidth = (brushSize);
+            ctx.current.strokeStyle = color + transparency;
+            ctx.current.lineWidth = brushSize;
             ctx.current.lineJoin = 'round'
             ctx.current.moveTo(lastPosition.x, lastPosition.y);
             ctx.current.lineTo(x, y)
@@ -203,7 +220,7 @@ export default function CanvasII() {
             });
 
         }
-    }, [lastPosition, mouseDown, color, setPosition])
+    }, [lastPosition, mouseDown, color, setPosition, brushSize])
 
     // const download = async () => {
     //     const image = canvasRef.current.toDataURL('image/png');
@@ -247,6 +264,18 @@ export default function CanvasII() {
         setBrushSize(50);
     }
 
+
+    const selectTransparency = (event, newValue) => {
+        setValue(newValue);
+        console.log(newValue);
+        let i = transparencyStops.findIndex(t => t.value == newValue);
+        console.log('index:' + i);
+        setTransparency(transparencyStops[i].hexValue);
+
+
+    }
+
+
     if (canvasImage) {
         return (
             <div >
@@ -289,16 +318,22 @@ export default function CanvasII() {
                                     </ButtonGroup>
                                 </ThemeProvider>
                             </div>
-                            <div style={style6} className="opacity">
+                            <div style={style6} className="transparency">
                                 <ThemeProvider theme={theme}>
-                                    <Typography style={style9}>Opacity:
+                                    <Typography style={style9}>Transparency:
                                     </Typography>
                                     <Box width={100} style={style12}>
                                         <Slider
-                                            size="small"
-                                            defaultValue={70}
+                                            size="Small steps"
+                                            min={10}
+                                            max={100}
+                                            step={10}
+                                            // defaultValue={100}
                                             aria-label="Small"
                                             valueLabelDisplay="auto"
+                                            onChange={selectTransparency}
+                                            value={value}
+
                                         />
                                     </Box>
                                 </ThemeProvider>
