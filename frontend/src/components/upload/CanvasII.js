@@ -30,6 +30,7 @@ export default function CanvasII() {
         y: 0
     });
     const [canvasImage, setCanvasImage] = React.useState(null);
+    const [brushSize, setBrushSize] = React.useState(25)
 
     //canvas
     var style1 = {
@@ -189,7 +190,7 @@ export default function CanvasII() {
         if (mouseDown) {
             ctx.current.beginPath();
             ctx.current.strokeStyle = color;
-            ctx.current.lineWidth = 50;
+            ctx.current.lineWidth = (brushSize);
             ctx.current.lineJoin = 'round'
             ctx.current.moveTo(lastPosition.x, lastPosition.y);
             ctx.current.lineTo(x, y)
@@ -234,6 +235,18 @@ export default function CanvasII() {
         draw(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
     }
 
+    const setBrushSmall = () => {
+        setBrushSize(12);
+    }
+
+    const setBrushMedium = () => {
+        setBrushSize(25);
+    }
+
+    const setBrushLarge = () => {
+        setBrushSize(50);
+    }
+
     if (canvasImage) {
         return (
             <div >
@@ -270,9 +283,9 @@ export default function CanvasII() {
                                 <ThemeProvider theme={theme}>
                                     <Typography style={style7}>Brush size:</Typography>
                                     <ButtonGroup variant="text" aria-label="text button group" style={style5}>
-                                        <Button>s</Button>
-                                        <Button>m</Button>
-                                        <Button>l</Button>
+                                        <Button onClick={setBrushSmall}>s</Button>
+                                        <Button onClick={setBrushMedium}>m</Button>
+                                        <Button onClick={setBrushLarge}>l</Button>
                                     </ButtonGroup>
                                 </ThemeProvider>
                             </div>
