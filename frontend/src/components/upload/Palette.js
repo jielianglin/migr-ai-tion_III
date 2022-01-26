@@ -33,11 +33,8 @@ var style1 = {
 export default function Palette(props) {
     const [color, setColor] = React.useState("#FFFFFF");
 
-    const recordColor = (color, event) => {
+    const recordColor = (color) => {
         props.selectColor(color.hex);
-
-        setColor(color.hex);
-        console.log(color.hex);
     }
 
     const changeColor = (color) => {
