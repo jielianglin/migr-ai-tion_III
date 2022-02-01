@@ -14,6 +14,7 @@ import Grid from '@mui/material/Grid';
 import RubberIcon from "../../pics/RubberIcon.jpg";
 import Palette from './Palette';
 import FileInput from './FileInput';
+import Context from '@mui/base/TabsUnstyled/TabsContext';
 
 // import "./CanvasII.css"
 
@@ -34,7 +35,9 @@ var transparencyStops = [
 
 export default function CanvasII() {
     const canvasRef = useRef(null);
+    const canvasRef2 = useRef(null);
     const ctx = useRef(null);
+    const ctx2 = useRef(null);
     const [color, setColor] = React.useState(['#B272CE']);
     const [size, setSize] = React.useState({ width: window.innerWidth, height: window.innerHeight })
     const [mouseDown, setMouseDown] = React.useState(false);
@@ -44,13 +47,17 @@ export default function CanvasII() {
     });
     const [canvasImage, setCanvasImage] = React.useState(null);
     const [brushSize, setBrushSize] = React.useState(25);
-    const [transparency, setTransparency] = React.useState(null);
+    const [transparency, setTransparency] = React.useState('FF');
     const [value, setValue] = React.useState(100);
+    const [eraser, setEraser] = React.useState(false);
+    const [painting, setPainting] = React.useState(true);
 
     //canvas
     var style1 = {
         border: "2px solid #D1C6B6",
         borderRadius: "5px",
+        zIndex: 1,
+        position: 'absolute'
     }
 
     //canvas div
@@ -59,13 +66,12 @@ export default function CanvasII() {
         justifyContent: "center",
     }
 
-    // var style3 = {
-    //     display: "flex",
-    //     backgroundColor: "#FFFFFF",
-    //     color: "#B272CE",
-    //     borderRadius: "15px",
-    //     margin: "0 auto"
-    // }
+    //canvas2 div
+    var style3 = {
+
+        zIndex: 2,
+
+    }
 
     // var style4 = {
     //     display: "flex",
@@ -189,8 +195,9 @@ export default function CanvasII() {
     var canvasHeight = size.height / 2.25;
 
     useEffect(() => {
-        if (canvasRef.current) {
+        if (canvasRef.current && canvasRef2.current) {
             ctx.current = canvasRef.current.getContext('2d');
+            ctx2.current = canvasRef2.current.getContext('2d');
             image = new Image();
             image.src = `${canvasImage}`
             image.onload = () => {
@@ -202,25 +209,53 @@ export default function CanvasII() {
 
 
 
+
+    const erase = () => {
+        setPainting(false);
+        setEraser(true);
+        console.log('eraser');
+    }
+
+    const paintingMode = () => {
+        setPainting(true);
+        setEraser(false);
+        console.log('painting');
+    }
+
     const draw = useCallback((x, y) => {
 
-        if (mouseDown) {
-            ctx.current.beginPath();
-            ctx.current.strokeStyle = color + transparency;
-            ctx.current.lineWidth = brushSize;
-            ctx.current.lineJoin = 'round'
-            ctx.current.moveTo(lastPosition.x, lastPosition.y);
-            ctx.current.lineTo(x, y)
-            ctx.current.closePath();
-            ctx.current.stroke();
-
-            setPosition({
-                x,
-                y
-            });
-
+        if (mouseDown && painting) {
+            ctx2.current.beginPath();
+            ctx2.current.strokeStyle = color + transparency;
+            console.log(color + transparency);
+            ctx2.current.lineWidth = brushSize;
+            ctx2.current.lineJoin = 'round'
+            ctx2.current.moveTo(lastPosition.x, lastPosition.y);
+            ctx2.current.lineTo(x, y)
+            ctx2.current.closePath();
+            ctx2.current.stroke();
+        } else {
+            if (mouseDown && eraser) {
+                ctx2.current.globalCompositeOperation = "destination-out";
+                ctx2.current.strokeStyle = "rgba(0,0,0,1)";
+                ctx2.current.lineWidth = brushSize;
+                ctx2.current.lineJoin = 'round'
+                ctx2.current.moveTo(lastPosition.x, lastPosition.y);
+                ctx2.current.lineTo(x, y)
+                ctx2.current.closePath();
+                ctx2.current.stroke();
+            }
         }
+
+        setPosition({
+            x,
+            y
+        });
+
+
     }, [lastPosition, mouseDown, color, setPosition, brushSize])
+
+
 
     // const download = async () => {
     //     const image = canvasRef.current.toDataURL('image/png');
@@ -233,7 +268,7 @@ export default function CanvasII() {
     // }
 
     const clear = () => {
-        ctx.current.clearRect(0, 0, ctx.current.canvas.width, ctx.current.canvas.height)
+        ctx2.current.clearRect(0, 0, ctx2.current.canvas.width, ctx2.current.canvas.height)
     }
 
     const onMouseDown = (e) => {
@@ -264,15 +299,12 @@ export default function CanvasII() {
         setBrushSize(50);
     }
 
-
     const selectTransparency = (event, newValue) => {
         setValue(newValue);
         console.log(newValue);
         let i = transparencyStops.findIndex(t => t.value == newValue);
         console.log('index:' + i);
         setTransparency(transparencyStops[i].hexValue);
-
-
     }
 
 
@@ -292,6 +324,16 @@ export default function CanvasII() {
                         width={canvasWidth}
                         height={canvasHeight}
                         ref={canvasRef}
+                    // onMouseMove={onMouseMove}
+                    // onMouseDown={onMouseDown}
+                    // onMouseUp={onMouseUp}
+                    // onMouseLeave={onMouseUp}
+                    />
+                    <canvas
+                        style={style3}
+                        width={canvasWidth}
+                        height={canvasHeight}
+                        ref={canvasRef2}
                         onMouseMove={onMouseMove}
                         onMouseDown={onMouseDown}
                         onMouseUp={onMouseUp}
@@ -303,7 +345,7 @@ export default function CanvasII() {
                     spacing={0}>
                     <Grid item xs={11} >
                         <div className="palette" style={style8}>
-                            <Palette selectColor={color => setColor(color)} />
+                            <Palette selectColor={color => setColor(color)} paintingMode={paintingMode} />
                         </div>
                     </Grid>
                     <Grid item xs={11} >
@@ -333,7 +375,7 @@ export default function CanvasII() {
                                             valueLabelDisplay="auto"
                                             onChange={selectTransparency}
                                             value={value}
-
+                                            defaultValue={transparency}
                                         />
                                     </Box>
                                 </ThemeProvider>
@@ -344,7 +386,7 @@ export default function CanvasII() {
                         <div classname="columnThree" style={style14}>
                             <div className="erase">
                                 <ThemeProvider theme={theme}>
-                                    <Chip style={style11} avatar={<Avatar alt="erase" src={RubberIcon} />} label="Erase" />
+                                    <Chip style={style11} avatar={<Avatar alt="erase" src={RubberIcon} />} label="Erase" onClick={erase} />
                                 </ThemeProvider>
                             </div>
                             <div className="undo">

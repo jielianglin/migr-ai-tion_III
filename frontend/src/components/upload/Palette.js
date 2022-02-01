@@ -67,17 +67,14 @@ export default function Palette(props) {
     const recordColor = (color) => {
         console.log(color.hex);
         props.selectColor(color.hex);
+        props.paintingMode();
+        console.log('paintingmode')
     }
 
     const changeColor = (color) => {
         setColor(color.hex);
         console.log(color);
     }
-
-
-
-
-
 
     return (
         <div>
