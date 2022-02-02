@@ -64,16 +64,17 @@ var style1 = {
 export default function Palette(props) {
     const [color, setColor] = React.useState("#FFFFFF");
 
-    const recordColor = (color) => {
-        console.log(color.hex);
-        props.selectColor(color.hex);
-        props.paintingMode();
-        console.log('paintingmode')
-    }
+    // const recordColor = (color) => {
+    //     console.log(color.hex);
+    //     props.selectColor(color.hex);
+    // }
 
     const changeColor = (color) => {
+        props.selectColor(color.hex);
         setColor(color.hex);
         console.log(color);
+        props.paint();
+        console.log('paintingmode')
     }
 
     return (
@@ -85,8 +86,9 @@ export default function Palette(props) {
                     color={color}
                     circleSize={28}
                     circleSpacing={23}
-                    onSwatchHover={recordColor}
-                    onClick={changeColor}
+                    // onClick={changeColor}
+                    // onSwatchHover={recordColor}
+                    onChangeComplete={changeColor}
                 />
 
             </div>

@@ -14,9 +14,7 @@ import Grid from '@mui/material/Grid';
 import RubberIcon from "../../pics/RubberIcon.jpg";
 import Palette from './Palette';
 import FileInput from './FileInput';
-import Context from '@mui/base/TabsUnstyled/TabsContext';
 
-// import "./CanvasII.css"
 
 var image;
 
@@ -51,6 +49,9 @@ export default function CanvasII() {
     const [value, setValue] = React.useState(100);
     const [eraser, setEraser] = React.useState(false);
     const [painting, setPainting] = React.useState(true);
+    const [compositeMode, setCompositeMode] = React.useState(null);
+
+    console.log(compositeMode);
 
     //canvas
     var style1 = {
@@ -208,24 +209,47 @@ export default function CanvasII() {
     }, [canvasImage, canvasWidth, canvasHeight])
 
 
+    const erase = useCallback((x, y,) => {
+        console.log('erasermode');
 
+        setColor("#0000FF");
+        // setTransparency("FF")
+        console.log("eraser color:" + color);
 
-    const erase = () => {
-        setPainting(false);
-        setEraser(true);
-        console.log('eraser');
-    }
+        setCompositeMode("destination-out");
+        console.log("1:" + compositeMode);
 
-    const paintingMode = () => {
-        setPainting(true);
-        setEraser(false);
-        console.log('painting');
-    }
-
-    const draw = useCallback((x, y) => {
-
-        if (mouseDown && painting) {
+        if (mouseDown) {
             ctx2.current.beginPath();
+            ctx2.current.globalCompositeOperation = compositeMode;
+            console.log("2:" + compositeMode);
+            ctx2.current.strokeStyle = color + transparency;
+            ctx2.current.lineWidth = brushSize;
+            ctx2.current.lineJoin = 'round'
+            ctx2.current.moveTo(lastPosition.x, lastPosition.y);
+            ctx2.current.lineTo(x, y)
+            ctx2.current.closePath();
+            ctx2.current.stroke();
+
+            setPosition({
+                x,
+                y
+            });
+        }
+
+
+    }, [lastPosition, mouseDown, color, setPosition, brushSize, eraser])
+
+    const paint = useCallback((x, y) => {
+
+        if (color !== "#0000FF") {
+            setCompositeMode("source-over");
+            console.log(color);
+        }
+
+        if (mouseDown) {
+            ctx2.current.beginPath();
+            ctx2.current.globalCompositeOperation = compositeMode;
             ctx2.current.strokeStyle = color + transparency;
             console.log(color + transparency);
             ctx2.current.lineWidth = brushSize;
@@ -234,28 +258,15 @@ export default function CanvasII() {
             ctx2.current.lineTo(x, y)
             ctx2.current.closePath();
             ctx2.current.stroke();
-        } else {
-            if (mouseDown && eraser) {
-                ctx2.current.globalCompositeOperation = "destination-out";
-                ctx2.current.strokeStyle = "rgba(0,0,0,1)";
-                ctx2.current.lineWidth = brushSize;
-                ctx2.current.lineJoin = 'round'
-                ctx2.current.moveTo(lastPosition.x, lastPosition.y);
-                ctx2.current.lineTo(x, y)
-                ctx2.current.closePath();
-                ctx2.current.stroke();
-            }
+
         }
 
         setPosition({
             x,
             y
         });
-
-
-    }, [lastPosition, mouseDown, color, setPosition, brushSize])
-
-
+    }
+        , [lastPosition, mouseDown, color, setPosition, brushSize, eraser])
 
     // const download = async () => {
     //     const image = canvasRef.current.toDataURL('image/png');
@@ -284,7 +295,7 @@ export default function CanvasII() {
     }
 
     const onMouseMove = (e) => {
-        draw(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
+        paint(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
     }
 
     const setBrushSmall = () => {
@@ -345,7 +356,9 @@ export default function CanvasII() {
                     spacing={0}>
                     <Grid item xs={11} >
                         <div className="palette" style={style8}>
-                            <Palette selectColor={color => setColor(color)} paintingMode={paintingMode} />
+                            <Palette selectColor={color => setColor(color)}
+                                paint={paint}
+                            />
                         </div>
                     </Grid>
                     <Grid item xs={11} >

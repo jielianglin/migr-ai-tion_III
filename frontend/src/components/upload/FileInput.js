@@ -27,6 +27,7 @@ export default function FileInput(props) {
         let reader = new FileReader();
         reader.onload = function (e) {
             setSrc(e.target.result);
+            console.log('loadfilereader');
         };
         reader.readAsDataURL(file);
     };
@@ -35,10 +36,11 @@ export default function FileInput(props) {
         if (src) {
             props.selectImage(src);
         }
-    }, [src]);
+    }, [src, props]);
 
     const openFileInput = () => {
         fileInput.current.click();
+        console.log('fileinput');
     };
 
     return (
