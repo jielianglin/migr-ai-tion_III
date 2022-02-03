@@ -17,7 +17,6 @@ import FileInput from './FileInput';
 
 
 var image;
-
 var transparencyStops = [
     { "value": 10, "hexValue": "1A" },
     { "value": 20, "hexValue": "33" },
@@ -31,9 +30,11 @@ var transparencyStops = [
     { "value": 100, "hexValue": "FF" },
 ]
 
+
 export default function CanvasII() {
     const canvasRef = useRef(null);
     const canvasRef2 = useRef(null);
+    const [canvasHeight, setCanvasHeight] = React.useState(null);
     const ctx = useRef(null);
     const ctx2 = useRef(null);
     const [color, setColor] = React.useState(['#B272CE']);
@@ -47,8 +48,6 @@ export default function CanvasII() {
     const [brushSize, setBrushSize] = React.useState(25);
     const [transparency, setTransparency] = React.useState('FF');
     const [value, setValue] = React.useState(100);
-    const [eraser, setEraser] = React.useState(false);
-    const [painting, setPainting] = React.useState(true);
     const [compositeMode, setCompositeMode] = React.useState(null);
 
     console.log(compositeMode);
@@ -179,6 +178,7 @@ export default function CanvasII() {
     });
 
     useEffect(() => {
+
         const checkSize = () => {
             setSize({
                 width: window.innerWidth,
@@ -187,26 +187,33 @@ export default function CanvasII() {
         };
         window.addEventListener('resize', checkSize);
         return () => window.removeEventListener('resize', checkSize);
+
     }, [])
 
+
     var canvasWidth = size.width / 2.25;
-    if (size.width < 1007) { canvasWidth = size.width - 50 }
-
-
-    var canvasHeight = size.height / 2.25;
+    if (size.width < 1007) {
+        canvasWidth = size.width - 50
+    };
 
     useEffect(() => {
+
         if (canvasRef.current && canvasRef2.current) {
             ctx.current = canvasRef.current.getContext('2d');
             ctx2.current = canvasRef2.current.getContext('2d');
-            image = new Image();
-            image.src = `${canvasImage}`
-            image.onload = () => {
-                ctx.current.drawImage(image, 0, 0, canvasWidth, canvasHeight);
-            };
         }
 
-    }, [canvasImage, canvasWidth, canvasHeight])
+        image = new Image();
+        image.src = `${canvasImage}`;
+        image.onload = () => {
+            var ratio = image.naturalWidth / image.naturalHeight;
+            var imageWidth = canvasWidth;
+            var imageHeight = imageWidth / ratio;
+            setCanvasHeight(imageHeight);
+            ctx.current.drawImage(image, 0, 0, imageWidth, imageHeight);
+        };
+
+    }, [canvasImage, size.width, canvasWidth])
 
 
     const erase = useCallback((x, y,) => {
@@ -238,7 +245,7 @@ export default function CanvasII() {
         }
 
 
-    }, [lastPosition, mouseDown, color, setPosition, brushSize, eraser])
+    }, [lastPosition, mouseDown, color, setPosition, brushSize, compositeMode, transparency])
 
     const paint = useCallback((x, y) => {
 
@@ -266,7 +273,7 @@ export default function CanvasII() {
             y
         });
     }
-        , [lastPosition, mouseDown, color, setPosition, brushSize, eraser])
+        , [lastPosition, mouseDown, color, setPosition, brushSize, compositeMode, transparency])
 
     // const download = async () => {
     //     const image = canvasRef.current.toDataURL('image/png');
@@ -313,7 +320,7 @@ export default function CanvasII() {
     const selectTransparency = (event, newValue) => {
         setValue(newValue);
         console.log(newValue);
-        let i = transparencyStops.findIndex(t => t.value == newValue);
+        let i = transparencyStops.findIndex(t => t.value === newValue);
         console.log('index:' + i);
         setTransparency(transparencyStops[i].hexValue);
     }
