@@ -30,12 +30,12 @@ var transparencyStops = [
     { "value": 100, "hexValue": "FF" },
 ]
 
-var paths = [];
-var lastpath = [];
-var points = [];
+// var paths = [];
+// var lastpath = [];
+// var points = [];
 
-var lastX;
-var lastY;
+// var lastX;
+// var lastY;
 
 export default function CanvasII() {
     const canvasRef = useRef(null);
@@ -55,7 +55,7 @@ export default function CanvasII() {
     const [transparency, setTransparency] = React.useState('FF');
     const [value, setValue] = React.useState(100);
     const [compositeMode, setCompositeMode] = React.useState(null);
-    const [history, setHistory] = React.useState();
+    // const [history, setHistory] = React.useState();
     // const [step, undoStep] = React.useState({});
 
     console.log(compositeMode);
@@ -281,10 +281,10 @@ export default function CanvasII() {
             ctx2.current.closePath();
             ctx2.current.stroke();
 
-            points.push({
-                x: x,
-                y: y
-            });
+            // points.push({
+            //     x: x,
+            //     y: y
+            // });
 
             // console.log(paths);
         }
@@ -298,9 +298,9 @@ export default function CanvasII() {
     }
         , [lastPosition, mouseDown, color, setPosition, brushSize, compositeMode, transparency])
 
-    const undo = () => {
-        setHistory(paths.filter(lastpath));
-    }
+    // const undo = () => {
+    //     setHistory(paths.filter(lastpath));
+    // }
 
     // const download = async () => {
     //     const image = canvasRef.current.toDataURL('image/png');
@@ -325,14 +325,14 @@ export default function CanvasII() {
     }
 
     const onMouseUp = () => {
-        lastpath.push(points);
+        // lastpath.push(points);
         setMouseDown(false);
-        setHistory(history);
-        setHistory(paths.push(lastpath));
-        console.log(paths[1]);
+        // setHistory(history);
+        // setHistory(paths.push(lastpath));
+        // console.log(paths[1]);
 
 
-        console.log(paths);
+        // console.log(paths);
     }
 
     const onMouseMove = (e) => {
@@ -439,11 +439,11 @@ export default function CanvasII() {
                                     <Chip style={style11} avatar={<Avatar alt="erase" src={RubberIcon} />} label="Erase" onClick={erase} />
                                 </ThemeProvider>
                             </div>
-                            <div className="undo">
+                            {/* <div className="undo">
                                 <ThemeProvider theme={theme}>
                                     <Chip style={style11} icon={<ArrowBackIcon />} label="Undo" onClick={undo} />
                                 </ThemeProvider>
-                            </div>
+                            </div> */}
                         </div>
                     </Grid>
                     <Grid item xs={11} md={4} >
