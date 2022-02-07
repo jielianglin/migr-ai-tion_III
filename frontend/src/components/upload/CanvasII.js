@@ -30,6 +30,12 @@ var transparencyStops = [
     { "value": 100, "hexValue": "FF" },
 ]
 
+var paths = [];
+var lastpath = [];
+var points = [];
+
+var lastX;
+var lastY;
 
 export default function CanvasII() {
     const canvasRef = useRef(null);
@@ -49,6 +55,8 @@ export default function CanvasII() {
     const [transparency, setTransparency] = React.useState('FF');
     const [value, setValue] = React.useState(100);
     const [compositeMode, setCompositeMode] = React.useState(null);
+    const [history, setHistory] = React.useState();
+    // const [step, undoStep] = React.useState({});
 
     console.log(compositeMode);
 
@@ -212,7 +220,6 @@ export default function CanvasII() {
             setCanvasHeight(imageHeight);
             ctx.current.drawImage(image, 0, 0, imageWidth, imageHeight);
         };
-
     }, [canvasImage, size.width, canvasWidth])
 
 
@@ -238,42 +245,62 @@ export default function CanvasII() {
             ctx2.current.closePath();
             ctx2.current.stroke();
 
+
             setPosition({
                 x,
                 y
             });
+
+
+
         }
+
 
 
     }, [lastPosition, mouseDown, color, setPosition, brushSize, compositeMode, transparency])
 
     const paint = useCallback((x, y) => {
-
         if (color !== "#0000FF") {
             setCompositeMode("source-over");
             console.log(color);
         }
 
         if (mouseDown) {
+
+
             ctx2.current.beginPath();
             ctx2.current.globalCompositeOperation = compositeMode;
             ctx2.current.strokeStyle = color + transparency;
             console.log(color + transparency);
             ctx2.current.lineWidth = brushSize;
-            ctx2.current.lineJoin = 'round'
+            ctx2.current.lineJoin = 'round';
+
+
             ctx2.current.moveTo(lastPosition.x, lastPosition.y);
             ctx2.current.lineTo(x, y)
             ctx2.current.closePath();
             ctx2.current.stroke();
 
+            points.push({
+                x: x,
+                y: y
+            });
+
+            // console.log(paths);
         }
 
         setPosition({
             x,
             y
         });
+
+
     }
         , [lastPosition, mouseDown, color, setPosition, brushSize, compositeMode, transparency])
+
+    const undo = () => {
+        setHistory(paths.filter(lastpath));
+    }
 
     // const download = async () => {
     //     const image = canvasRef.current.toDataURL('image/png');
@@ -298,7 +325,14 @@ export default function CanvasII() {
     }
 
     const onMouseUp = () => {
+        lastpath.push(points);
         setMouseDown(false);
+        setHistory(history);
+        setHistory(paths.push(lastpath));
+        console.log(paths[1]);
+
+
+        console.log(paths);
     }
 
     const onMouseMove = (e) => {
@@ -342,10 +376,6 @@ export default function CanvasII() {
                         width={canvasWidth}
                         height={canvasHeight}
                         ref={canvasRef}
-                    // onMouseMove={onMouseMove}
-                    // onMouseDown={onMouseDown}
-                    // onMouseUp={onMouseUp}
-                    // onMouseLeave={onMouseUp}
                     />
                     <canvas
                         style={style3}
@@ -411,7 +441,7 @@ export default function CanvasII() {
                             </div>
                             <div className="undo">
                                 <ThemeProvider theme={theme}>
-                                    <Chip style={style11} icon={<ArrowBackIcon />} label="Undo" />
+                                    <Chip style={style11} icon={<ArrowBackIcon />} label="Undo" onClick={undo} />
                                 </ThemeProvider>
                             </div>
                         </div>
