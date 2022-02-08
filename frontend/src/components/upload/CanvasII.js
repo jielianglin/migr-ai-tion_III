@@ -65,13 +65,16 @@ export default function CanvasII() {
         border: "2px solid #D1C6B6",
         borderRadius: "5px",
         zIndex: 1,
-        position: 'absolute'
+        position: 'absolute',
+
     }
 
     //canvas div
     var style2 = {
         display: "flex",
         justifyContent: "center",
+        padding: "20px",
+
     }
 
     //canvas2 div
@@ -201,7 +204,7 @@ export default function CanvasII() {
 
     var canvasWidth = size.width / 2.25;
     if (size.width < 1007) {
-        canvasWidth = size.width - 50
+        canvasWidth = size.width - 90
     };
 
     useEffect(() => {
@@ -266,7 +269,6 @@ export default function CanvasII() {
         }
 
         if (mouseDown) {
-
 
             ctx2.current.beginPath();
             ctx2.current.globalCompositeOperation = compositeMode;
@@ -362,9 +364,7 @@ export default function CanvasII() {
         return (
             <div >
                 <Typography>
-                    Upload a picture and make a collage using your photograph and our painting tool!
-                    <br />
-                    You can paint some emotions about your memory.
+                    Upload a picture and make a <b>collage</b> using your photograph and our painting tool!
                     <br />
                     <br />
                 </Typography>
@@ -380,10 +380,15 @@ export default function CanvasII() {
                         width={canvasWidth}
                         height={canvasHeight}
                         ref={canvasRef2}
+                        //mouse events
                         onMouseMove={onMouseMove}
                         onMouseDown={onMouseDown}
                         onMouseUp={onMouseUp}
                         onMouseLeave={onMouseUp}
+                        //touch events
+                        onTouchStart={onMouseDown}
+                        onTouchMove={onMouseMove}
+                        onTouchEnd={onMouseUp}
                     />
                 </div>
                 <br />

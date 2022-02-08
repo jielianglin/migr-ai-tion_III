@@ -101,7 +101,7 @@ var style15 = {
     color: "#B272CE",
     fontStyle: "italic",
     textAlign: "left",
-    padding: "20px"
+    padding: "15px"
 }
 
 // intro text div

@@ -58,7 +58,7 @@ var style1 = {
     // marginBottom: '25px',
     borderRadius: '25px',
     // margin: '0 auto',
-    width: "325px"
+    width: "308px"
 }
 
 export default function Palette(props) {
@@ -85,7 +85,7 @@ export default function Palette(props) {
                     colors={colors}
                     color={color}
                     circleSize={28}
-                    circleSpacing={23}
+                    circleSpacing={20}
                     // onClick={changeColor}
                     // onSwatchHover={recordColor}
                     onChangeComplete={changeColor}
