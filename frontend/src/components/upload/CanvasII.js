@@ -330,8 +330,6 @@ export default function CanvasII() {
         // setHistory(history);
         // setHistory(paths.push(lastpath));
         // console.log(paths[1]);
-
-
         // console.log(paths);
     }
 

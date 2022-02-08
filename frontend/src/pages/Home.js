@@ -89,17 +89,31 @@ var style13 = {
     color: "white",
 }
 
+//themes text div
 var style14 = {
     display: 'flex',
     justifyContent: 'left',
 
 }
 
+//themes text
 var style15 = {
     color: "#B272CE",
-    fontSize: '35px',
     fontStyle: "italic",
-    textAlign: "center"
+    textAlign: "left",
+    padding: "20px"
+}
+
+// intro text div
+var style16 = {
+    padding: "20px",
+}
+
+// 'join open source' 
+var style17 = {
+    background: "white",
+    color: "#B272CE",
+    borderRadius: '15px',
 }
 
 export default function Home() {
@@ -238,15 +252,16 @@ export default function Home() {
                         </Grid>
                     </div>
                     <br />
-                    <div>
-                        <Typography >
+                    <div style={style16}>
+
+                        <hr />
+                        <Typography variant="h7" className="introText">
                             We are using <b>Expressive-Arts Therapy</b> and <b>Applied Visual Anthropology</b> techniques to collect an anti-colonial dataset about migration.
                             The purpose is to inform the public, AI researchers and businesses about the importance of representing the diverse experiences in the development of emerging technologies. Through our <b>User Research</b>, we have designed and developed a special image-annotation tool for
                             communicating migrant experiences, as a way of sharing intercultural knowledge and disseminating personal and collective tools for healing.
-                            {/* <br />
-                            <br />
-                            <span style={style16}>Some migration topics that we care about are:</span> */}
                         </Typography>
+
+                        <hr />
                     </div>
                     <Grid container spacing={2} style={style2}>
                         <Grid item xs={12} md={4} style={style9}>
@@ -260,7 +275,7 @@ export default function Home() {
                                     <div style={style14}>
                                         <br />
                                         {homeText && (
-                                            <Typography style={style15}>
+                                            <Typography variant="h7" style={style15} className="themesText">
                                                 <hr />
                                                 We use creative and healing tools to synthesize notions of what <b>#home</b> means for those living in liminal states.
                                                 <hr />
@@ -282,7 +297,7 @@ export default function Home() {
                                     <div style={style14}>
                                         {solidarityText && (
 
-                                            <Typography style={style15}>
+                                            <Typography variant="h7" style={style15} className="themesText">
                                                 <hr />
                                                 We highlight issues, such as, migration flows, representation, discrimmination, surveillance and labor under the umbrella of <b> #solidarity</b>.
                                                 <hr />
@@ -303,7 +318,7 @@ export default function Home() {
                                     <br />
                                     <div style={style14}>
                                         {wellbeingText && (
-                                            <Typography style={style15} onMouseEnter={showWellbeingText} onMouseLeave={hideWellbeingText}>
+                                            <Typography variant="h7" style={style15} className="themesText">
                                                 <hr />
                                                 We research cultural and individual notions and practices of <b>#well-being</b> and connect various threads of knowledge to form intercultural models for being well together.
                                                 <hr />
@@ -316,8 +331,8 @@ export default function Home() {
 
                     <div style={style2}>
                         <Stack spacing={2} direction="column" style={style3}>
-                            <Button variant="contained" style={style4}>  Join Our Newsletter!  </Button>
-                            <Button variant="contained" style={style4}>  Make a Donation!  </Button>
+                            <Button variant="contained" style={style4}>  Sign Up For Our Newsletter!  </Button>
+                            <Button variant="contained" style={style17}>  Join Our Open Source Community!  </Button>
                         </Stack>
                     </div>
                 </div >
