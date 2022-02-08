@@ -203,7 +203,7 @@ export default function CanvasII() {
 
 
     var canvasWidth = size.width / 2.25;
-    if (size.width < 1007) {
+    if (size.width < 600) {
         canvasWidth = size.width - 90
     };
 
