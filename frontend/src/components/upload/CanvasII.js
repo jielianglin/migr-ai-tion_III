@@ -79,9 +79,7 @@ export default function CanvasII() {
 
     //canvas2 div
     var style3 = {
-
         zIndex: 2,
-
     }
 
     // var style4 = {

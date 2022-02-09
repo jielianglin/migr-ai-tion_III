@@ -38,10 +38,11 @@ export default function TextForm(props) {
         padding: "10px 10px 10px 10px"
     }
 
+
     var style4 = {
         marginTop: "10px",
     }
-
+    //user chip 
     var style5 = {
         fontSize: '16px',
         color: "#B272CE",
@@ -51,6 +52,7 @@ export default function TextForm(props) {
         marginRight: "10px",
     }
 
+    //avatar styling
     var style6 = {
         backgroundColor: "#B272CE",
         color: "White",
