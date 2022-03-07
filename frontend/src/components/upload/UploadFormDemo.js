@@ -8,7 +8,7 @@ import TextForm from "./TextForm";
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { ThemeProvider, useTheme } from '@mui/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -18,8 +18,11 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Chip from "@mui/material/Chip";
 import Avatar from '@mui/material/Avatar';
 
-import upload from '../../pics/upload.png';
-import discovery from '../../pics/discovery.png';
+import Yassi_Hormoz from '../../pics/Yassi_Hormoz.jpeg';
+import Yassi_Hormoz_annotation from '../../pics/Yassi_Hormoz_annotation.jpeg';
+import Popover from '@mui/material/Popover';
+
+import "./UploadFormDemo.css";
 
 export default function Home() {
     const [returnView, setReturnView] = React.useState(false);
@@ -27,7 +30,7 @@ export default function Home() {
     const [submitButton, showSubmitButton] = React.useState(true);
     const [annotation, setAnnotation] = React.useState(false);
     const [visibilityButton, setVisibilityButton] = React.useState(true);
-    // const [visibilityOffButton, setVisibilityOffButton] = React.useState(false);
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
     //upload view div
     var style1 = {
@@ -59,25 +62,28 @@ export default function Home() {
     // image div
     var style5 = {
         display: "flex",
-        justifyContent: "center",
-        marginTop: "10px"
+        justifyContent: "left",
+        marginTop: "10px",
+        marginRight: "10px"
     }
 
-    //pic 1
-    var style6 = {
-        zIndex: 1,
-        position: 'absolute',
-        border: "2px solid #D1C6B6",
-        borderRadius: "5px",
-    }
+    // //pic 1
+    // var style6 = {
+    //     zIndex: 1,
+    //     position: 'absolute',
+    //     border: "2px solid #D1C6B6",
+    //     borderRadius: "5px",
+    //     width: "720px"
+    // }
 
-    //pic 2
-    var style7 = {
-        zIndex: 2,
-        border: "2px solid #D1C6B6",
-        borderRadius: "5px",
-        position: "absolute"
-    }
+    // //pic 2
+    // var style7 = {
+    //     zIndex: 2,
+    //     border: "2px solid #D1C6B6",
+    //     borderRadius: "5px",
+    //     position: "absolute",
+    //     width: "720px"
+    // }
 
     //typography 
     var style8 = {
@@ -94,7 +100,7 @@ export default function Home() {
     //visibility toggle button
     var style10 = {
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "left",
         zIndex: 3,
         position: "relative",
         paddingTop: "20px"
@@ -119,13 +125,11 @@ export default function Home() {
     }
 
     // tags div
-    var style13 = {
-
-
-        marginTop: "90px",
-        zIndex: 4,
-        position: 'absolute'
-    }
+    // var style13 = {
+    //     marginTop: "90px",
+    //     zIndex: 4,
+    //     position: 'absolute'
+    // }
 
     //imageNetChip
     var style14 = {
@@ -145,7 +149,14 @@ export default function Home() {
         paddingBottom: "3px",
     }
 
-    const theme = useTheme({
+    //canvas visibility button
+    var style16 = {
+        border: "1px solid #4F4F4F",
+        borderRadius: "1px",
+        padding: "0px 2px 0px 2px"
+    }
+
+    const theme = createTheme({
         palette: {
             primary: {
                 main: "#B272CE",
@@ -154,7 +165,18 @@ export default function Home() {
     });
 
 
+    const openPopover = Boolean(anchorEl);
+    const showPopover = (event) => {
+        setAnchorEl(event.currentTarget);
+    }
+
+    const hidePopover = () => {
+        setAnchorEl(null);
+    };
+
     const showDemo = () => {
+        hidePopover();
+
         var timer = null;
 
         setProgress(true);
@@ -188,126 +210,153 @@ export default function Home() {
                         <Grid item xs={12} md={6}>
                             <Typography style={style8}> Success! Now compare your tags to the AI tags from ImageNet.</Typography>
                             <div style={style10}>
-                                <Button > {visibilityButton ? <VisibilityIcon onClick={showAnnotation} /> : <VisibilityOffIcon onClick={hideAnnotation} />} </Button>
+
+                                <btn style={style16}> Canvas {visibilityButton ? <VisibilityIcon onClick={showAnnotation} /> : <VisibilityOffIcon onClick={hideAnnotation} />} </btn>
+
                             </div>
                             <div style={style5}>
 
-                                <img src={upload} alt="" style={style6} />
-                                {annotation && <img src={discovery} alt="" style={style7} />}
+                                <img src={Yassi_Hormoz} alt=""
+                                    // style={style6} 
+                                    class="demoImage1" />
+
+                                {annotation && <img src={Yassi_Hormoz_annotation} alt=""
+                                    // style={style7} 
+                                    class="demoImage2" />}
                             </div>
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <div style={style13}>
-                                <Typography style={style8}> Your Tags: </Typography>
+                            <div
+                                // style={style13} 
+                                class="demoTags">
+                                <Typography style={style8}> <b>Your Tags:</b> </Typography>
                                 <div>
                                     <Chip
                                         avatar={<Avatar style={style12}><b>#</b></Avatar>}
                                         className="tags-chip"
                                         style={style11}
-                                        label="test"
+                                        label="Hormoz"
                                         variant="filled"
                                     />
                                     <Chip
                                         avatar={<Avatar style={style12}><b>#</b></Avatar>}
                                         className="tags-chip"
                                         style={style11}
-                                        label="test"
+                                        label="Iran"
                                         variant="filled"
                                     />
                                     <Chip
                                         avatar={<Avatar style={style12}><b>#</b></Avatar>}
                                         className="tags-chip"
                                         style={style11}
-                                        label="test"
+                                        label="colors"
                                         variant="filled"
                                     />
                                     <Chip
                                         avatar={<Avatar style={style12}><b>#</b></Avatar>}
                                         className="tags-chip"
                                         style={style11}
-                                        label="test"
+                                        label="textures"
                                         variant="filled"
                                     />
                                     <Chip
                                         avatar={<Avatar style={style12}><b>#</b></Avatar>}
                                         className="tags-chip"
                                         style={style11}
-                                        label="test"
+                                        label="Mars"
                                         variant="filled"
                                     />
                                     <Chip
                                         avatar={<Avatar style={style12}><b>#</b></Avatar>}
                                         className="tags-chip"
                                         style={style11}
-                                        label="test"
+                                        label="footsteps"
                                         variant="filled"
                                     />
                                     <Chip
                                         avatar={<Avatar style={style12}><b>#</b></Avatar>}
                                         className="tags-chip"
                                         style={style11}
-                                        label="test"
+                                        label="belonging"
                                         variant="filled"
                                     />
-                                    <Chip
-                                        avatar={<Avatar style={style12}><b>#</b></Avatar>}
-                                        className="tags-chip"
-                                        style={style11}
-                                        label="test"
-                                        variant="filled"
-                                    />
+
                                 </div>
                                 <br />
                                 <br />
-                                <Typography style={style8}> ImageNet Tags: </Typography>
+                                <Typography style={style8}> <b>ImageNet Tags:</b> </Typography>
                                 <Chip
                                     avatar={<Avatar style={style15}><b>#</b></Avatar>}
                                     className="tags-chip"
                                     style={style14}
-                                    label="test"
+                                    label="sky"
                                     variant="filled"
                                 />
                                 <Chip
                                     avatar={<Avatar style={style15}><b>#</b></Avatar>}
                                     className="tags-chip"
                                     style={style14}
-                                    label="test"
+                                    label="clouds"
                                     variant="filled"
                                 /><Chip
                                     avatar={<Avatar style={style15}><b>#</b></Avatar>}
                                     className="tags-chip"
                                     style={style14}
-                                    label="test"
+                                    label="dirt"
                                     variant="filled"
                                 /><Chip
                                     avatar={<Avatar style={style15}><b>#</b></Avatar>}
                                     className="tags-chip"
                                     style={style14}
-                                    label="test"
+                                    label="bin"
+                                    variant="filled"
+                                />
+                                <Chip
+                                    avatar={<Avatar style={style15}><b>#</b></Avatar>}
+                                    className="tags-chip"
+                                    style={style14}
+                                    label="plastic bag"
+                                    variant="filled"
+                                />
+                                <Chip
+                                    avatar={<Avatar style={style15}><b>#</b></Avatar>}
+                                    className="tags-chip"
+                                    style={style14}
+                                    label="bottle"
                                     variant="filled"
                                 /><Chip
                                     avatar={<Avatar style={style15}><b>#</b></Avatar>}
                                     className="tags-chip"
                                     style={style14}
-                                    label="test"
-                                    variant="filled"
-                                /><Chip
-                                    avatar={<Avatar style={style15}><b>#</b></Avatar>}
-                                    className="tags-chip"
-                                    style={style14}
-                                    label="test"
+                                    label="rocks"
                                     variant="filled"
                                 />
                             </div>
                         </Grid>
                     </Grid>
                 </div>
+                {/* <br />
                 <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+
                 <Stack>
                     <div style={style3}>
                         <Button variant="contained" style={style4}>  To the Gallery  </Button>
                     </div>
-                </Stack>
+                </Stack> */}
 
             </div>
         );
@@ -327,7 +376,36 @@ export default function Home() {
 
                 <div style={style2}>
                     <Stack spacing={2} direction="row" style={style3}>
-                        {submitButton && <Button variant="contained" style={style4} onClick={showDemo}>  Submit  </Button>}
+                        {submitButton && <Button variant="contained" style={style4} onClick={showDemo} onMouseEnter={showPopover} onMouseLeave={hidePopover}> Submit  </Button>}
+                        <Popover
+                            id="mouse-over-popover"
+                            sx={{
+                                pointerEvents: 'none',
+                            }}
+                            PaperProps={{
+                                elevation: 0,
+                                sx: {
+                                    backgroundColor:
+                                        "#D1C6B6",
+                                    padding:
+                                        "8px"
+                                }
+                            }}
+                            open={openPopover}
+                            anchorEl={anchorEl}
+
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            transformOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}
+                            onClose={hidePopover}
+                            disableRestoreFocus
+                        ><Typography>Hello! <br /><b><i>The following section is for demo purposes only.</i></b> <br />The database is currently under construction. <br /> Click "Submit" to see our designs.
+                            </Typography></Popover>
                         <ThemeProvider theme={theme}>
                             {progress && <CircularProgress />}
                         </ThemeProvider>

@@ -1,0 +1,33 @@
+.demoImage1{
+        z-index: 1;
+        position: absolute;
+        border: 2px solid #D1C6B6;
+        border-radius: 5px;
+        width: 45%;
+        
+}
+
+.demoImage2{
+        z-index: 2;
+        position: absolute;
+        border: 2px solid #D1C6B6;
+        border-radius: 5px;
+        width: 45%;
+        
+}
+
+.demoTags{
+margin-top: 80px;
+}
+
+@media (max-width: 600px){
+    .demoImage1 {
+        width: 75%; 
+    }
+    .demoImage2 {
+        width: 75%; 
+    }
+    .demoTags {
+        margin-top: 200px; 
+    }
+}
