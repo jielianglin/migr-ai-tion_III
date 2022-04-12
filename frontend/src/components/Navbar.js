@@ -54,6 +54,8 @@ export default function Navbar() {
                         <MDBNavbarLink href='/Blog'>Blog</MDBNavbarLink>
                         <MDBNavbarLink href='/About'>About</MDBNavbarLink>
                         <MDBNavbarLink href='/Contact'>Contact</MDBNavbarLink>
+                        <MDBNavbarLink href='/Login'>Login</MDBNavbarLink>
+                        <MDBNavbarLink href='/Profile'>Profile</MDBNavbarLink>
                     </MDBNavbarNav>
                 </MDBCollapse>
             </MDBContainer>
