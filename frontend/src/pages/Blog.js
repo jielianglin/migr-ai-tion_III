@@ -1,9 +1,13 @@
 import React from "react";
 
 export default function Blog() {
+    var style1 = {
+        margin: "50px"
+    }
+
     return (
-        <div>
-            This is the Blog page.
+        <div style={style1}>
+            Under construction.
         </div>
     );
 }
