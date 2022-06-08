@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Gallery() {
+export default function Login() {
     return (
         <div>
-            This is the Gallery.
+            This is the Login page.
         </div>
     );
 }
