@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import UploadFormDemo from "../components/upload/UploadFormDemo";
 import Gallery from "../components/discovery/Gallery";
