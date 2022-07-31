@@ -6,13 +6,11 @@ import Blog from "./pages/Blog";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 
-
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Profile from "./components/Profile";
-import BoardUser from "./components/BoardUser";
-import BoardModerator from "./components/BoardModerator";
-import BoardAdmin from "./components/BoardAdmin";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import Profile from "./pages/auth/Profile";
+import BoardUser from "./pages/auth/BoardUser";
+import BoardAdmin from "./pages/auth/BoardAdmin";
 
 const App = () => {
 
@@ -29,9 +27,8 @@ const App = () => {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/profile" element={<Profile />} />
-          <Route exact path="/user" element={<BoardUser />} />
-          <Route exact path="/mod" element={<BoardModerator />} />
-          <Route exact path="/admin" element={<BoardAdmin />} />
+          {/* <Route exact path="/user" element={<BoardUser />} />
+          <Route exact path="/admin" element={<BoardAdmin />} /> */}
         </Routes>
       </Router>
     </div>

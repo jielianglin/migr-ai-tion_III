@@ -3,7 +3,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
-import AuthService from "../services/auth.service";
+import AuthService from "../../components/auth-services/auth.service";
 const required = (value) => {
     if (!value) {
         return (
@@ -85,7 +85,7 @@ const Register = () => {
         }
     };
     return (
-        <div className="col-md-12">
+        <div className="col-md-4">
             <div className="card card-container">
                 <img
                     src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"

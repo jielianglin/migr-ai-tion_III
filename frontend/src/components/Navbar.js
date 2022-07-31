@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 import {
     MDBContainer,
@@ -14,11 +14,10 @@ import {
 import logo from "../pics/logo.png"
 import './Navbar.css';
 
-import AuthService from "..components/auth/auth.service";
+import AuthService from "./auth-services/auth.service";
 
 export default function Navbar() {
     const [showNavSecond, setShowNavSecond] = useState(false);
-    const [showModeratorBoard, setShowModeratorBoard] = useState(false);
     const [showAdminBoard, setShowAdminBoard] = useState(false);
     const [currentUser, setCurrentUser] = useState(undefined);
 
@@ -26,7 +25,6 @@ export default function Navbar() {
         const user = AuthService.getCurrentUser();
         if (user) {
             setCurrentUser(user);
-            setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
             setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
         }
     }, []);
@@ -73,10 +71,6 @@ export default function Navbar() {
                         <MDBNavbarLink href='/About'>About</MDBNavbarLink>
                         <MDBNavbarLink href='/Contact'>Contact</MDBNavbarLink>
 
-                        {showModeratorBoard && (
-                            <MDBNavbarLink href="/mod"> Moderator Board </MDBNavbarLink>
-                        )}
-
                         {showAdminBoard && (
                             <MDBNavbarLink href="/admin"> Admin Board </MDBNavbarLink>
                         )}
@@ -100,14 +94,14 @@ export default function Navbar() {
                         ) : (
                             <div className="navbar-nav ml-auto">
                                 <li className="nav-item">
-                                    <MDBNavbarLink to={"/login"} className="nav-link">
+                                    <MDBNavbarLink href={"/login"} className="nav-link">
                                         Login
                                     </MDBNavbarLink>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to={"/register"} className="nav-link">
+                                    <MDBNavbarLink href={"/register"} className="nav-link">
                                         Sign Up
-                                    </Link>
+                                    </MDBNavbarLink>
                                 </li>
                             </div>
                         )}

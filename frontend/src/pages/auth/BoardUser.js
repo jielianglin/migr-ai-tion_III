@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import UserService from "../components/auth/user.service";
+import UserService from "../../components/auth-services/user.service";
 export default class BoardUser extends Component {
     constructor(props) {
         super(props);
