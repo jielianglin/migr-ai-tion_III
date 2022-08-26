@@ -1,9 +1,25 @@
+require('dotenv').config(); // loads .env file contents into process.env object
+
 const express = require("express");
-const bodyParser = require("body-parser");
 const cors = require("cors");
-const app = express();
+const db = require("./models");
+
+const env = require('./config/config');
+require('./helpers/env-check');
+
+//api routes
+const initRoutes = require("./src/routes/image.routes");
+global.__basedir = __dirname;
+
+// const bodyParser = require("body-parser");
+const app = express(); // this will cancel the startup if necessary env variables are missing...
+
+//for upload api
+app.use(express.urlencoded({ extended: true }));
+initRoutes(app);
+
 var corsOptions = {
-    origin: "http://localhost:8080"
+    origin: "http://localhost:8081"
 }
 
 app.use(cors(corsOptions));
@@ -15,8 +31,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //simple route
 
-const db = require("./models");
+
+
 const Role = db.role;
+
+//for production, use sync() without parameters;
+// db.sequelize.sync();
+
+// for development:
 db.sequelize.sync({ force: true }).then(() => {
     console.log('Drop and Resync Db');
     initial();
@@ -43,15 +65,10 @@ function initial() {
         name: "user"
     });
 
-    // Role.create({
-    //     id:2,
-    //     name: "moderator"
-    // });
-
     Role.create({
         id: 2,
         name: "admin"
-    })
+    });
 
 
 }
