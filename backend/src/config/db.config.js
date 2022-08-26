@@ -1,7 +1,8 @@
+
 module.exports = {
     HOST: "localhost",
     USER: "root",
-    PASSWORD: "owonsd_SQLRT22",
+    PASSWORD: "password",
     DB: "testdb",
     dialect: "mysql",
     pool: {
