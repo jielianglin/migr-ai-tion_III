@@ -1,3 +1,4 @@
+require('dotenv').config(); 
 module.exports = {
-    secret: "migr-ai-tion-secret-key"
+    secret: process.env.secret
 };
