@@ -23,10 +23,7 @@ db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.role = require("../models/role.model.js")(sequelize, Sequelize);
 db.image = require("./image.model.js")(sequelize, Sequelize);
 db.tags = require("./tags.model.js")(sequelize, Sequelize);
-<<<<<<< HEAD
-//db.annotation = require("./annotation.model.js")(sequelize, Sequelize);
-=======
->>>>>>> 5c32fc5dfaa863fb2a379a020f87e88acdeb8cae
+
 
 //one-to-one relationship of users and roles
 
