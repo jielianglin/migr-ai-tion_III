@@ -25,10 +25,17 @@ db.image = require("./image.model.js")(sequelize, Sequelize);
 db.tags = require("./tags.model.js")(sequelize, Sequelize);
 
 
-//one-to-one relationship of users and roles
-
-db.role.hasOne(db.user);
-db.user.belongsTo(db.role);
+//junction table user_roles
+db.role.belongsToMany(db.user, {
+    through: "user_roles",
+    foreignKey: "roleId",
+    otherKey: "userId"
+})
+db.user.belongsToMany(db.role, {
+    through: "user_roles",
+    foreignKey: "userId",
+    otherKey: "roleId"
+});
 
 //tracking image uploads for each user
 db.user.hasMany(db.image, {
