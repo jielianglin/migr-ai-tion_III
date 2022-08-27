@@ -35,6 +35,7 @@ db.user.belongsToMany(db.role, {
     through: "user_roles",
     foreignKey: "userId",
     otherKey: "roleId"
+
 });
 
 //tracking image uploads for each user
