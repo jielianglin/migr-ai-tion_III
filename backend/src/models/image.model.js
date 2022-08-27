@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
         name: {
             type: DataTypes.STRING,
         },
-        data: {
+        image_data: {
             type: DataTypes.BLOB("long"),
         },
-        annotation: {
+        annotation_data: {
             type: DataTypes.BLOB("long"),
         },
         description: {

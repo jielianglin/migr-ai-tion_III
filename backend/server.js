@@ -2,7 +2,7 @@ require('dotenv').config(); // loads .env file contents into process.env object
 
 const express = require("express");
 const cors = require("cors");
-const db = require("./models");
+const db = require("./src/models");
 
 const env = require('./config/config');
 require('./helpers/env-check');
