@@ -1,9 +1,11 @@
+const mySecret = process.env['SECRET_KEY']
+require('dotenv').config(); 
 
 module.exports = {
-    HOST: "localhost",
+    HOST: "127.0.0.1",
     USER: "root",
-    PASSWORD: "password",
-    DB: "testdb",
+    PASSWORD: process.env.dbPassword,
+    DB: "sys",
     dialect: "mysql",
     pool: {
         max: 5,
@@ -12,3 +14,5 @@ module.exports = {
         idle: 10000
     }
 }; 
+
+

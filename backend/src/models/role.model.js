@@ -1,3 +1,5 @@
+const Sequelize = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
     const Role = sequelize.define("roles", {
         id: {

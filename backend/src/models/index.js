@@ -23,37 +23,29 @@ db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.role = require("../models/role.model.js")(sequelize, Sequelize);
 db.image = require("./image.model.js")(sequelize, Sequelize);
 db.tags = require("./tags.model.js")(sequelize, Sequelize);
-db.annotation = require("./annotation.model.js")(sequelize, Sequelize);
 
-//junction table user_roles
-db.role.belongsToMany(db.user, {
-    through: "user_roles",
-    foreignKey: "roleId",
-    otherKey: "userId"
-})
-db.user.belongsToMany(db.role, {
-    through: "user_roles",
-    foreignKey: "userId",
-    otherKey: "roleId"
 
-});
+//one-to-one relationship of users and roles
+
+db.role.hasOne(db.user);
+db.user.belongsTo(db.role);
 
 //tracking image uploads for each user
-// db.role.hasMany(db.image, {
-//     foreignKey: "imageId"
-// });
-// db.image.belongsTo(db.role);
+db.user.hasMany(db.image, {
+    foreignKey: "image_id"
+});
+db.image.belongsTo(db.role);
 
 //junction table images_tags
 db.image.belongsToMany(db.tags, {
     through: "images_tags",
-    foreignKey: "imageId",
-    otherKey: "tagId"
+    foreignKey: "image_id",
+    otherKey: "tag_id"
 });
 db.tags.belongsToMany(db.image, {
     through: "images_tags",
-    foreignKey: "tagId",
-    otherKey: "imageId"
+    foreignKey: "tag_id",
+    otherKey: "image_id"
 });
 
 //don't understand this line

@@ -18,7 +18,7 @@ const tagsValidator = (req, cb) => {
     } else {
         cb("Tags field is missing.", false);
     }
-};
+
 
 //check if tag has no punctuations in them
 for (var i = 0; i < jsonData.length; i++) {
@@ -32,6 +32,7 @@ for (var i = 0; i < jsonData.length; i++) {
             return tags;
         }
     });
+};
 };
 
 // IMPORTANT: Does JSON need to be parsed to store into SQL?
