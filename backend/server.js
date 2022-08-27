@@ -2,10 +2,10 @@ require('dotenv').config(); // loads .env file contents into process.env object
 
 const express = require("express");
 const cors = require("cors");
-const db = require("./models");
+const db = require("./src/models");
 
-const env = require('./config/config');
-require('./helpers/env-check');
+//const env = require('./src/config');
+//require('./helpers/env-check');
 
 //api routes
 const initRoutes = require("./src/routes/image.routes");
@@ -49,8 +49,8 @@ app.get("/", (req, res) => {
 });
 
 // routes
-require('./routes/auth.routes')(app);
-require('./routes/user.routes')(app);
+require('./src/routes/auth.routes')(app);
+require('./src/routes/user.routes')(app);
 
 // set port, listen for requests
 

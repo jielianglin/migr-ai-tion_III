@@ -23,7 +23,7 @@ db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.role = require("../models/role.model.js")(sequelize, Sequelize);
 db.image = require("./image.model.js")(sequelize, Sequelize);
 db.tags = require("./tags.model.js")(sequelize, Sequelize);
-db.annotation = require("./annotation.model.js")(sequelize, Sequelize);
+//db.annotation = require("./annotation.model.js")(sequelize, Sequelize);
 
 //junction table user_roles
 db.role.belongsToMany(db.user, {

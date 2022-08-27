@@ -1,8 +1,9 @@
+const mySecret = process.env['SECRET_KEY']
 
 module.exports = {
     HOST: "localhost",
     USER: "root",
-    PASSWORD: "password",
+    PASSWORD: {mySecret},
     DB: "testdb",
     dialect: "mysql",
     pool: {
@@ -12,3 +13,4 @@ module.exports = {
         idle: 10000
     }
 }; 
+
