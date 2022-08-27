@@ -4,8 +4,8 @@ const express = require("express");
 const cors = require("cors");
 const db = require("./src/models");
 
-//const env = require('./src/config');
-//require('./helpers/env-check');
+//const env = require('./config/config');
+// require('./helpers/env-check');
 
 //api routes
 const initRoutes = require("./src/routes/image.routes");
