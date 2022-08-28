@@ -58,7 +58,7 @@ const getImagesbyTags = async (req, res) => {
 
     }
     catch (error) {
-        console.log(err);
+        console.log(error);
         return res.send(`Error when trying to get images: ${error}.`);
     }
 }

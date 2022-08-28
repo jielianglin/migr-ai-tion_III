@@ -1,13 +1,21 @@
 const { response } = require("express");
+const Sequelize = require("sequelize");
 const db = require("../models");
 const Tags = db.tags;
-
+const Image = db.image;
 //upload tags
 const uploadTags = async (req, res) => {
     try {
-        Tags.create().then((tag) => {
-            res.json(tag)
-        });
+        for(var i = 0; i < req.body.length; i++){
+        Tags.create({
+            name: req.body[i].name,
+            type: req.body[i].type
+        }).then((tag) => {
+            console.log(tag)
+        })};
+        res.send(
+           "done" 
+        )
     } catch (error) {
         console.log(error);
         return res.send(`Error when trying post tags: ${error}`)
@@ -16,6 +24,7 @@ const uploadTags = async (req, res) => {
 
 // return uploaded tags per image to gallery
 const getTagsforImage = async (req, res) => {
+    console.log(req.body)
     try {
         const filterImageId = `${req.body.id}`;
         const getTagsbyImageId = await Tags.findAll({
@@ -28,7 +37,7 @@ const getTagsforImage = async (req, res) => {
 
     }
     catch (error) {
-        console.log(err);
+        console.log(error);
         return res.send(`Error when trying to return tags: ${error}.`);
     }
 }
