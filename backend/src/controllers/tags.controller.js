@@ -8,15 +8,16 @@ const Image = db.image;
 const uploadTags = async (req, res) => {
     console.log(req.body)
     try {
-        for(var i = 0; i < req.body.length; i++){
-        Tags.create({
-            name: req.body[i].name,
-            type: req.body[i].type
-        }).then((tag) => {
-            console.log(tag)
-        })};
+        for (var i = 0; i < req.body.length; i++) {
+            Tags.create({
+                name: req.body[i].name,
+                type: req.body[i].type
+            }).then((tag) => {
+                console.log(tag)
+            })
+        };
         res.send(
-           "done" 
+            "done"
         )
     } catch (error) {
         console.log(error);
@@ -44,7 +45,28 @@ const getTagsforImage = async (req, res) => {
     }
 }
 
+const queryByTag = async (req, res) => {
+    console.log(req.body)
+    try {
+        var query = `${req.body.param}`;
+
+        const getTagsbyImageId = await Tags.findAll({
+            include: [{
+                model: Image,
+                attributes: ['id', 'name', 'image_data', 'annotation_data', 'description', 'tags'],
+                where: Sequelize.literal(`tags.name = '${query}'`)
+            }]
+        }).then(res.json({ success: true, data: getTagsbyImageId }));
+
+    }
+    catch (error) {
+        console.log(error);
+        return res.send(`Error when trying to return tags: ${error}.`);
+    }
+}
+
 module.exports = {
     uploadTags,
-    getTagsforImage
+    getTagsforImage,
+    queryByTag
 };
