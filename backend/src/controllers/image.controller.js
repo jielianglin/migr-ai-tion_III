@@ -1,15 +1,14 @@
+const { response } = require("express");
 const fs = require("fs");
 const { tags, Sequelize } = require("../models");
 const db = require("../models");
 const Image = db.image;
 const Tags = db.tags;
-// const User = db.user;
 
 //upload images
 const uploadImages = async (req, res) => {
-    console.log(req)
+    console.log(req);
     try {
-        console.log(req.file);
         if (req.file == undefined) {
             return res.send(`You must select a file.`);
         }

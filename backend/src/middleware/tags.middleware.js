@@ -3,7 +3,7 @@ const multer = require("multer");
 const bodyParser = require('body-parser');
 
 const tagsValidator = (req, cb) => {
-
+    console.log("test")
     var jsonData = req.body;
 
 
