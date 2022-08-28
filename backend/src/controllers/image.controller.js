@@ -7,8 +7,7 @@ const Tags = db.tags;
 
 //upload images
 const uploadImages = async (req, res) => {
-
-
+    console.log(req)
     try {
         console.log(req.file);
         if (req.file == undefined) {
@@ -58,7 +57,7 @@ const getImagesbyTags = async (req, res) => {
 
     }
     catch (error) {
-        console.log(err);
+        console.log(error);
         return res.send(`Error when trying to get images: ${error}.`);
     }
 }
@@ -84,7 +83,7 @@ const getImagesbyUser = async (req, res) => {
         res.send('/uploads/' + getImagesbyUser + '/' + file);
     }
     catch (error) {
-        console.log(err);
+        console.log(error);
         return res.send(`Error when trying to get images: ${error}.`);
     }
 }
