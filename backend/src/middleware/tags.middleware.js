@@ -2,10 +2,9 @@
 const multer = require("multer");
 const bodyParser = require('body-parser');
 
-const tagsValidator = (req, cb) => {
-    console.log("test")
+const tagsValidator = (req, cb, next) => {
+    console.log("test");
     var jsonData = req.body;
-
 
     //check that the User has entered tags
     if (jsonData !== undefined) {
@@ -13,10 +12,6 @@ const tagsValidator = (req, cb) => {
     } else {
         cb("Tags field is missing.", false);
     }
-
-
-
-    // IMPORTANT: Does JSON need to be parsed to store into SQL? --convert to array of strings
 
     //check if tag has no punctuations in them
     for (var i = 0; i < jsonData.length; i++) {
@@ -31,12 +26,8 @@ const tagsValidator = (req, cb) => {
             }
         });
     };
+
 };
-
-// check if db.tags.name has duplicates. 
-//in the case of duplicate, no need to create a new uuid. 
-//if there is no duplicate, create a new uuid and save
-
 
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
