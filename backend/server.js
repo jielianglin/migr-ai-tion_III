@@ -11,11 +11,16 @@ const db = require("./src/models");
 const initRoutes = require("./src/routes/image.routes");
 global.__basedir = __dirname;
 
-// const bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
+const { urlencoded } = require('body-parser');
 const app = express(); // this will cancel the startup if necessary env variables are missing...
 
 //for upload api
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 initRoutes(app);
 
 var corsOptions = {

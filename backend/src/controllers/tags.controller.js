@@ -1,10 +1,12 @@
 const { response } = require("express");
-const Sequelize = require("sequelize");
+const { tags, images, Sequelize } = require("../models");
 const db = require("../models");
 const Tags = db.tags;
 const Image = db.image;
+
 //upload tags
 const uploadTags = async (req, res) => {
+    console.log(req.body)
     try {
         for(var i = 0; i < req.body.length; i++){
         Tags.create({

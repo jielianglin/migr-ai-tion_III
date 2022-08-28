@@ -1,6 +1,14 @@
 const multer = require("multer");
+const bodyParser = require('body-parser');
 
 const imageFilter = (req, file, cb) => {
+    var jsonData = req.body;
+    if (jsonData !== undefined) {
+        cb(null, true);
+    } else {
+        cb("Image field is missing.", false);
+    }
+ 
     if (file.mimetype.startsWith("image/jpeg") || file.mimetype.startsWith("image/jpg") || file.mimetype.startsWith("image/png")) {
         cb(null, true);
     } else {
