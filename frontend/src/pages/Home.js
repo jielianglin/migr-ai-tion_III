@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import UploadFormDemo from "../components/upload/UploadFormDemo";
+import UploadForm from "../components/upload/UploadForm";
 import Gallery from "../components/discovery/Gallery";
 
 import upload from "../pics/upload.png";
@@ -177,7 +178,7 @@ export default function Home() {
     }
 
     if (uploadMode) {
-        return <UploadFormDemo />
+        return <UploadForm />
     } else {
         if (discoveryMode) {
             return <Gallery />

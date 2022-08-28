@@ -37,9 +37,9 @@ var transparencyStops = [
 // var lastX;
 // var lastY;
 
-export default function CanvasII() {
-    const canvasRef = useRef(null);
-    const canvasRef2 = useRef(null);
+export default function CanvasII(props) {
+    const canvasRef = props.canvasRef;
+    const canvasRef2 = props.canvasRef2;
     const [canvasHeight, setCanvasHeight] = React.useState(null);
     const ctx = useRef(null);
     const ctx2 = useRef(null);
@@ -57,8 +57,6 @@ export default function CanvasII() {
     const [compositeMode, setCompositeMode] = React.useState(null);
     // const [history, setHistory] = React.useState();
     // const [step, undoStep] = React.useState({});
-
-    console.log(compositeMode);
 
     //canvas
     var style1 = {
@@ -263,7 +261,6 @@ export default function CanvasII() {
     const paint = useCallback((x, y) => {
         if (color !== "#0000FF") {
             setCompositeMode("source-over");
-            console.log(color);
         }
 
         if (mouseDown) {

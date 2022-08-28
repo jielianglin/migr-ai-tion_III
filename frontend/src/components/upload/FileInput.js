@@ -27,7 +27,6 @@ export default function FileInput(props) {
         let reader = new FileReader();
         reader.onload = function (e) {
             setSrc(e.target.result);
-            console.log('loadfilereader');
         };
         reader.readAsDataURL(file);
     };
@@ -40,7 +39,6 @@ export default function FileInput(props) {
 
     const openFileInput = () => {
         fileInput.current.click();
-        console.log('fileinput');
     };
 
     return (

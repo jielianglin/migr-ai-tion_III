@@ -176,6 +176,7 @@ export default function Home() {
 
     const showDemo = () => {
         hidePopover();
+        console.log("Here!");
 
         var timer = null;
 

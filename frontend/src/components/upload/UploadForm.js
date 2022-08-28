@@ -15,7 +15,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 export default function Home() {
     const [post, setPost] = React.useState(false);
     const [image, setImage] = React.useState(null);
-    // const [tags, setTags] = React.useState([]);
+    const canvasRef = React.useRef(null);
+    const canvasRef2 = React.useRef(null);
+    const [tags, setTags] = React.useState([]);
     const [text, setText] = React.useState(null);
     const [src, setSrc] = React.useState(null);
     const [progress, setProgress] = React.useState(false);
@@ -67,18 +69,22 @@ export default function Home() {
     const enteredText = (text) => {
         setText(text);
     };
-    // const selectedTags = (tags) => {
-    //     setTags(tags);
-    // };
+    const selectedTags = (tags) => {
+        setTags(tags);
+    };
 
-    async function postData() {
+    const postData = async () =>{
         setProgress(true);
+        console.log(canvasRef);
+        console.log(canvasRef2);
         // console.log(tags);
         // console.log(tags.join(","));
         let formData = new FormData();
         formData.append("file", image);
         formData.append("text", text);
-        // formData.append("tags", tags.join(","));
+        console.log(image);
+        console.log(text);
+        formData.append("tags", tags.join(","));
         let response = await axios.post("http://localhost:8000/images", formData);
         // props.newTitle();
         setSrc(`http://localhost:8000/images/${response.data.id}.jpeg`);
@@ -114,7 +120,7 @@ export default function Home() {
                     <Grid container spacing={9}>
                         <Grid item xs={12} md={6}>
                             {/* <Canvas selectedImage={selectedImage} /> */}
-                            <CanvasII selectedImage={selectedImage} />
+                            <CanvasII canvasRef={canvasRef} canvasRef2={canvasRef2}/>
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <TextForm enteredText={enteredText} />
