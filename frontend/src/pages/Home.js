@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import UploadFormDemo from "../components/upload/UploadFormDemo";
 import Gallery from "../components/discovery/Gallery";
@@ -180,7 +180,10 @@ export default function Home() {
         return <UploadFormDemo />
     } else {
         if (discoveryMode) {
-            return <Gallery />
+
+            return null
+            //<Gallery />
+
         } else {
             return (
                 <div style={style1}>

@@ -9,8 +9,8 @@ import Contact from "./pages/Contact";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Profile from "./pages/auth/Profile";
-import BoardUser from "./pages/auth/BoardUser";
-import BoardAdmin from "./pages/auth/BoardAdmin";
+// import BoardUser from "./pages/auth/BoardUser";
+// import BoardAdmin from "./pages/auth/BoardAdmin";
 
 const App = () => {
 
