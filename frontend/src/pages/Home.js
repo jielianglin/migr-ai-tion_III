@@ -1,7 +1,7 @@
 import React from "react";
 
 import UploadFormDemo from "../components/upload/UploadFormDemo";
-import Gallery from "../components/discovery/Gallery";
+// import Gallery from "../components/discovery/Gallery";
 
 import upload from "../pics/upload.png";
 import discovery from "../pics/discovery.png";
