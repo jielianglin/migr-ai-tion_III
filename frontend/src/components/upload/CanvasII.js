@@ -1,19 +1,18 @@
-import React, { useEffect, useRef, useCallback } from 'react';
-import Typography from '@mui/material/Typography';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Slider from '@mui/material/Slider';
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
 import Chip from '@mui/material/Chip';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import DeleteIcon from '@mui/icons-material/Delete';
 import Grid from '@mui/material/Grid';
+import Slider from '@mui/material/Slider';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import React, { useCallback, useEffect, useRef } from 'react';
 
 import RubberIcon from "../../pics/RubberIcon.jpg";
-import Palette from './Palette';
 import FileInput from './FileInput';
+import Palette from './Palette';
 
 
 var image;
@@ -37,7 +36,7 @@ var transparencyStops = [
 // var lastX;
 // var lastY;
 
-export default function CanvasII() {
+export default function CanvasII(props) {
     const canvasRef = useRef(null);
     const canvasRef2 = useRef(null);
     const [canvasHeight, setCanvasHeight] = React.useState(null);
@@ -358,6 +357,10 @@ export default function CanvasII() {
     }
 
 
+    const updateCanvasImage = (image) => {
+        props.selectedImage(image);
+    }
+
     if (canvasImage) {
         return (
             <div >
@@ -459,7 +462,7 @@ export default function CanvasII() {
     } else {
         return (
             <div >
-                <FileInput selectImage={setCanvasImage} />
+                <FileInput selectImage={updateCanvasImage} />
             </div>
         );
     }

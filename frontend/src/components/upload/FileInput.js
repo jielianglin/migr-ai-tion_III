@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
-import upload from "../../pics/upload.png";
 import Typography from '@mui/material/Typography';
+import { useEffect, useRef, useState } from 'react';
+import upload from "../../pics/upload.png";
 
 
 export default function FileInput(props) {
@@ -23,13 +23,17 @@ export default function FileInput(props) {
     }
 
     const handleImageSelection = (event) => {
+        console.log('I am attaching this file: ', event.target.files[0]);
         let file = event.target.files[0];
-        let reader = new FileReader();
-        reader.onload = function (e) {
-            setSrc(e.target.result);
-            console.log('loadfilereader');
-        };
-        reader.readAsDataURL(file);
+        // let reader = new FileReader();
+        // reader.onload = function (e) {
+        //     setSrc(e.target.result);
+        //     console.log('loadfilereader');
+        // };
+        // reader.readAsDataURL(file);
+        //         console.log('data as url: ', reader)
+
+        props.selectImage(file)
     };
 
     useEffect((event) => {
@@ -40,7 +44,6 @@ export default function FileInput(props) {
 
     const openFileInput = () => {
         fileInput.current.click();
-        console.log('fileinput');
     };
 
     return (

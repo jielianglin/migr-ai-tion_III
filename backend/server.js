@@ -21,10 +21,10 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
-initRoutes(app);
+// initRoutes(app);
 
 var corsOptions = {
-    origin: "http://localhost:8081"
+    origin: 'http://localhost:3000',
 }
 
 app.use(cors(corsOptions));
@@ -56,7 +56,8 @@ app.get("/", (req, res) => {
 // routes
 require('./src/routes/auth.routes')(app);
 require('./src/routes/user.routes')(app);
-require('./src/routes/tags.routes')(app);
+require('./src/routes/tags.routes')(app)
+require('./src/routes/image.routes')(app)
 
 // set port, listen for requests
 

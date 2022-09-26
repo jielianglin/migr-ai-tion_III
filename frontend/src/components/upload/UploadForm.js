@@ -1,24 +1,24 @@
-import React from "react";
-import axios from "axios";
+import axios from 'axios'
+import React from 'react'
 
 // import Canvas from "./Canvas";
-import CanvasII from "./CanvasII";
-import TextForm from "./TextForm";
+import CanvasII from './CanvasII'
+import TextForm from './TextForm'
 
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import { ThemeProvider, useTheme } from '@mui/styles';
-import Typography from '@mui/material/Typography';
-import CircularProgress from '@mui/material/CircularProgress';
+import Button from '@mui/material/Button'
+import CircularProgress from '@mui/material/CircularProgress'
+import Grid from '@mui/material/Grid'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
+import { ThemeProvider, useTheme } from '@mui/styles'
 
-export default function Home() {
-    const [post, setPost] = React.useState(false);
-    const [image, setImage] = React.useState(null);
+export default function UploadForm() {
+    const [post, setPost] = React.useState(false)
+    const [image, setImage] = React.useState(null)
     // const [tags, setTags] = React.useState([]);
-    const [text, setText] = React.useState(null);
-    const [src, setSrc] = React.useState(null);
-    const [progress, setProgress] = React.useState(false);
+    const [text, setText] = React.useState(null)
+    const [src, setSrc] = React.useState(null)
+    const [progress, setProgress] = React.useState(false)
 
     // const [src, setSrc] = React.useState(null);
     // const [returnTags, setReturnTags] = React.useState([]);
@@ -26,70 +26,77 @@ export default function Home() {
     // const [returnAITags, setReturnAITags] = React.useState([]);
 
     var style1 = {
-        margin: "50px",
+        margin: '50px',
     }
 
     var style2 = {
-        marginTop: "30px",
-        margin: "0auto",
-        display: "flex",
-        justifyContent: "center",
+        marginTop: '30px',
+        margin: '0auto',
+        display: 'flex',
+        justifyContent: 'center',
     }
 
     var style3 = {
-        display: "flex",
-        justifyContent: "center",
-        margin: "50px",
+        display: 'flex',
+        justifyContent: 'center',
+        margin: '50px',
     }
 
     var style4 = {
-        backgroundColor: "#B272CE",
+        backgroundColor: '#B272CE',
         borderRadius: '15px',
     }
 
     var style5 = {
-        display: "flex",
-        justifyContent: "center",
+        display: 'flex',
+        justifyContent: 'center',
     }
 
     const theme = useTheme({
         palette: {
             primary: {
-                main: "#B272CE",
+                main: '#B272CE',
             },
-        }
-    });
+        },
+    })
 
     const selectedImage = (img) => {
-        setImage(img);
-    };
+        console.log(`File from fileinput to canvaII to Upload Form`, img)
+        setImage(img)
+    }
 
     const enteredText = (text) => {
-        setText(text);
-    };
+        setText(text)
+    }
     // const selectedTags = (tags) => {
     //     setTags(tags);
     // };
 
-    async function postData() {
-        setProgress(true);
+    const postData = async () => {
+        console.log('POSTING THE IMAGE FUNCTION')
+        // setProgress(true);
         // console.log(tags);
         // console.log(tags.join(","));
-        let formData = new FormData();
-        formData.append("file", image);
-        formData.append("text", text);
+        let formData = new FormData()
+        formData.append('file', image)
+        formData.append('text', text)
         // formData.append("tags", tags.join(","));
-        let response = await axios.post("http://localhost:8000/images", formData);
+        console.log(`I am shooting this from the form:`, formData)
+        let response = await axios.post(
+            'http://localhost:8080/images',
+            formData
+        )
+        console.log(`I get this answer from POST /images:`, response.data)
         // props.newTitle();
-        setSrc(`http://localhost:8000/images/${response.data.id}.jpeg`);
-        console.log(response.data.text);
+        // setSrc(`http://localhost:8000/images/${response.data.id}.jpeg`);
+        // console.log(response.data.text);
         // setReturnCaption(response.data.caption);
         // console.log(response.data.tags);
         // setReturnTags(response.data.tags);
         // console.log(response.data.ai_tags);
         // setReturnAITags(response.data.ai_tags || []);
-        setPost(true);
-        setProgress(false);
+        // setPost(true);
+        // setProgress(false);
     }
 
     if (post) {
@@ -97,17 +104,25 @@ export default function Home() {
             <div>
                 <Typography> Success!</Typography>
                 <div style={style5}>
-                    <img src={src} alt="" className="returnImg" />
+                    <img src={src} alt='' className='returnImg' />
                 </div>
-                <Stack spacing={2} direction="column" style={style3}>
-                    <Button variant="contained" style={style4}>  Back to Home </Button>
-                    <Button variant="contained" style={style4}>  Go to the Gallery  </Button>
-                    <Button variant="contained" style={style4}>  See Data Analysis  </Button>
+                <Stack spacing={2} direction='column' style={style3}>
+                    <Button variant='contained' style={style4}>
+                        {' '}
+                        Back to Home{' '}
+                    </Button>
+                    <Button variant='contained' style={style4}>
+                        {' '}
+                        Go to the Gallery{' '}
+                    </Button>
+                    <Button variant='contained' style={style4}>
+                        {' '}
+                        See Data Analysis{' '}
+                    </Button>
                 </Stack>
-
             </div>
-        );
-    } else {
+        )
+    } else if(!post) {
         return (
             <div style={style1}>
                 <div>
@@ -123,14 +138,23 @@ export default function Home() {
                 </div>
 
                 <div style={style2}>
-                    <Stack spacing={2} direction="row" style={style3}>
-                        <Button variant="contained" style={style4} onClick={postData}>  Submit  </Button>
+                    <Stack spacing={2} direction='row' style={style3}>
+                        <Button
+                            variant='contained'
+                            style={style4}
+                            onClick={() => {
+                                console.log('Clicked upload...')
+                                postData()
+                            }}>
+                            {' '}
+                            Submit{' '}
+                        </Button>
                         <ThemeProvider theme={theme}>
                             {progress && <CircularProgress />}
                         </ThemeProvider>
                     </Stack>
                 </div>
-            </div >
-        );
+            </div>
+        )
     }
 }

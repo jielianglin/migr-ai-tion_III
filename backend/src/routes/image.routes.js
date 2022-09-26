@@ -4,13 +4,14 @@ const express = require("express");
 const router = express.Router();
 
 const imageController = require("../controllers/image.controller");
-const imageMiddleware = require("../middleware/image.middleware");
-// const upload = multer({ dest: "./" });
+const upload = require("../middleware/image.middleware");
 
 let routes = (app) => {
-    router.get("/image", imageController.getImagesbyTags);
+    router.get("/images", imageController.getImagesbyTags);
     //below needs to be tested
-    router.post("/image", imageMiddleware.single("file"), imageController.uploadImages);
+    router.post("/images",
+        upload.single("file"),
+        imageController.uploadImages);
     //below is working
     // router.post("/image", upload.single("file"), imageController.uploadImages);
     return app.use("/", router);

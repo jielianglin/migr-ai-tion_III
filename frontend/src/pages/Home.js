@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-import UploadFormDemo from "../components/upload/UploadFormDemo";
 import Gallery from "../components/discovery/Gallery";
+import UploadForm from "../components/upload/UploadForm";
 
-import upload from "../pics/upload.png";
 import discovery from "../pics/discovery.png";
 import HomeIcon from "../pics/HomeIcon.png";
 import SolidarityIcon from "../pics/SolidarityIcon.png";
+import upload from "../pics/upload.png";
 import WellBeingIcon from "../pics/WellBeingIcon.png";
 
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 import Popover from '@mui/material/Popover';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
 import "./Home.css";
 
@@ -176,8 +176,9 @@ export default function Home() {
         setWellbeingText(false);
     }
 
+    console.log({ discoveryMode, uploadMode });
     if (uploadMode) {
-        return <UploadFormDemo />
+        return <UploadForm />
     } else {
         if (discoveryMode) {
             return <Gallery />

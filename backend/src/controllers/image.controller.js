@@ -7,7 +7,7 @@ const Tags = db.tags;
 
 //upload images
 const uploadImages = async (req, res) => {
-    console.log(req);
+    console.log({ files: req.files })
     try {
         if (req.file == undefined) {
             return res.send(`You must select a file.`);
@@ -16,11 +16,12 @@ const uploadImages = async (req, res) => {
             type: req.file.mimetype,
             name: req.file.originalname,
             image_data: fs.readFileSync(
-                __basedir + "/resources/static/assets/uploads/image" + req.file.filename
+                __basedir + "/resources/static/assets/uploads/" + req.file.filename
             ),
+
             //converting annotation to base64
             annotation_data: Buffer(fs.readFileSync(
-                __basedir + "/resources/static/assets/uploads/annotation" + req.file.filename
+                __basedir + "/resources/static/assets/uploads/" + req.file.filename
             )).toString('base64'),
             description: req.body.description,
         }).then((image) => {
@@ -35,6 +36,7 @@ const uploadImages = async (req, res) => {
         return res.send(`Error when trying upload images: ${error}`)
     }
 };
+
 //fetch images according to tags
 const getImagesbyTags = async (req, res) => {
     try {
