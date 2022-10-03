@@ -1,5 +1,9 @@
 import React from "react";
 
+import Jie_portrait from "../pics/Jie_portrait.jpg";
+import Laura_portrait from "../pics/Laura_portrait.jpeg";
+import Yassi_portrait from "../pics/Yassi_portrait.jpg";
+
 
 export default function About() {
     var style1 = {
@@ -12,6 +16,7 @@ export default function About() {
 
     return (
         <div style={style1}>
+
             <h2><i>
                 We research diversity and technological inclusion, in order to develop new tools for co-creating AI.
                 <br />
@@ -28,13 +33,15 @@ export default function About() {
             <br />
             <div><b>FOUNDERS</b></div>
             <br />
+            <img src={Jie_portrait} width="100px" style={{ borderRadius: "50%", margin: "10px" }} />
             <div ><span style={style2}>Jie Liang Lin </span> <br />is a Chinese-American artist, visual and media anthropologist
                 and web developer, based in Berlin. Her work focuses on then intersections of new technologies, migration phenomena,
                 memory and mediation. Her research areas include migration, digital ethnography, and practice-led and applied methodologies.
                 She is interested in the interplay between drawing and photography, and in de-lineating a creative
                 history of image-annotation. </div>
             <br />
-            <div> <span style={style2}>Yasaman Pishvaie </span> <br />
+            <img src={Yassi_portrait} width="100px" style={{ borderRadius: "50%", margin: "10px" }} />
+            <div> <span style={style2}>Yasaman Pishvaei </span> <br />
                 is a multidisciplinary Iranian artist and Expressive Arts therapist based in Potsdam, Germany.
                 Her art-based research is focused on investigating new forms of interconnection and belonging
                 at the bridges of the online and offline worlds by utilizing the transformational and curative
@@ -45,6 +52,7 @@ export default function About() {
             <br />
             <div><b>TEAM</b></div>
             <br />
+            <img src={Laura_portrait} width="100px" style={{ borderRadius: "50%", margin: "10px" }} />
             <div> <span style={style2}> Laura de Paz // <i>Product Manager</i> </span><br />
                 is a Spanish, Berlin-based web developer and writer on neurodiversity.
                 She has a background in Classical Philology (ancient Greek and Latin) and German studies.
