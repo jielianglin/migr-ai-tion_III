@@ -1,4 +1,4 @@
-const multer = require("multer");
+const multer = require("multer"); // multer is a node middleware for handling multipart form data like images
 const imageFilter = (req, file, cb) => {
     if (file.mimetype.startsWith("image")) {
         cb(null, true);

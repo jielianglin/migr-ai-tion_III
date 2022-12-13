@@ -8,7 +8,7 @@ const imageMiddleware = require("../middleware/image.middleware");
 const upload = multer({ dest: "./" });
 
 let routes = (app) => {
-    router.get("/image", imageController.getImagesbyTags);
+    router.get("/image", imageController.getImagesbyTags); // sequelize syntax
     //below needs to be tested
     router.post("/image", upload.array('uploaded_image', 2), imageMiddleware, imageController.uploadImages);
     //below is working

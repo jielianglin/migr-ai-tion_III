@@ -37,7 +37,6 @@ app.use(express.urlencoded({ extended: true }));
 //simple route
 
 
-
 const Role = db.role;
 
 //for production, use sync() without parameters;
@@ -65,6 +64,7 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 })
 
+//create new user account
 function initial() {
     Role.create({
         id: 1,
