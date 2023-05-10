@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 
-// import Canvas from "./Canvas";
 import CanvasII from "./CanvasII";
 import TextForm from "./TextForm";
 
@@ -12,13 +11,14 @@ import { ThemeProvider, useTheme } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 
-export default function Home() {
+export default function UploadForm() {
     const [post, setPost] = React.useState(false);
-    const [image, setImage] = React.useState(null);
-    // const [tags, setTags] = React.useState([]);
+    const [files, setFiles] = React.useState(null);
+    const [tags, setTags] = React.useState([]);
     const [text, setText] = React.useState(null);
     const [src, setSrc] = React.useState(null);
     const [progress, setProgress] = React.useState(false);
+    const [trigger, setTrigger] = React.useState(false);
 
     // const [src, setSrc] = React.useState(null);
     // const [returnTags, setReturnTags] = React.useState([]);
@@ -59,26 +59,31 @@ export default function Home() {
             },
         }
     });
-
-    const selectedImage = (img) => {
-        setImage(img);
+    //receive data from child (CanvasII)
+    const readiedFiles = (photoData, annotationData) => {
+        console.log("receiving files from CanvasII");
+        console.log("photodata:", photoData, "annotationData:", annotationData);
+        // setFiles(photoData, annotationData);
     };
 
     const enteredText = (text) => {
         setText(text);
     };
-    // const selectedTags = (tags) => {
-    //     setTags(tags);
-    // };
+    const selectedTags = (tags) => {
+        setTags(tags);
+    };
 
     async function postData() {
+        setTrigger(!trigger);
         setProgress(true);
-        // console.log(tags);
-        // console.log(tags.join(","));
+        console.log(tags);
+        console.log(tags.join(","));
+
         let formData = new FormData();
-        formData.append("file", image);
+        //is this correct?
+        formData.append("files", files);
         formData.append("text", text);
-        // formData.append("tags", tags.join(","));
+        formData.append("tags", tags.join(","));
         let response = await axios.post("http://localhost:8000/images", formData);
         // props.newTitle();
         setSrc(`http://localhost:8000/images/${response.data.id}.jpeg`);
@@ -102,7 +107,6 @@ export default function Home() {
                 <Stack spacing={2} direction="column" style={style3}>
                     <Button variant="contained" style={style4}>  Back to Home </Button>
                     <Button variant="contained" style={style4}>  Go to the Gallery  </Button>
-                    <Button variant="contained" style={style4}>  See Data Analysis  </Button>
                 </Stack>
 
             </div>
@@ -113,11 +117,10 @@ export default function Home() {
                 <div>
                     <Grid container spacing={9}>
                         <Grid item xs={12} md={6}>
-                            {/* <Canvas selectedImage={selectedImage} /> */}
-                            <CanvasII selectedImage={selectedImage} />
+                            <CanvasII trigger={trigger} imgFiles={readiedFiles} />
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <TextForm enteredText={enteredText} />
+                            <TextForm enteredText={enteredText} selectedTags={selectedTags} />
                         </Grid>
                     </Grid>
                 </div>

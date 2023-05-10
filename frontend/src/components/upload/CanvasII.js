@@ -15,7 +15,6 @@ import RubberIcon from "../../pics/RubberIcon.jpg";
 import Palette from './Palette';
 import FileInput from './FileInput';
 
-
 var image;
 var transparencyStops = [
     { "value": 10, "hexValue": "1A" },
@@ -37,7 +36,8 @@ var transparencyStops = [
 // var lastX;
 // var lastY;
 
-export default function CanvasII() {
+export default function CanvasII(props) {
+
     const canvasRef = useRef(null);
     const canvasRef2 = useRef(null);
     const [canvasHeight, setCanvasHeight] = React.useState(null);
@@ -141,7 +141,6 @@ export default function CanvasII() {
         // padding: "5px 30px 0px 0px",
     }
 
-
     var style10 = {
         // backgroundColor: "rgba( 255, 255, 255, 0.5)",
         fontSize: "16px",
@@ -185,7 +184,7 @@ export default function CanvasII() {
             },
         },
     });
-
+    // resize image
     useEffect(() => {
 
         const checkSize = () => {
@@ -199,12 +198,12 @@ export default function CanvasII() {
 
     }, [])
 
-
+    // define canvas size
     var canvasWidth = size.width / 2.25;
     if (size.width < 600) {
         canvasWidth = size.width - 90
     };
-
+    // render canvases
     useEffect(() => {
 
         if (canvasRef.current && canvasRef2.current) {
@@ -223,7 +222,7 @@ export default function CanvasII() {
         };
     }, [canvasImage, size.width, canvasWidth])
 
-
+    // eraser function
     const erase = useCallback((x, y,) => {
         console.log('erasermode');
 
@@ -256,10 +255,9 @@ export default function CanvasII() {
 
         }
 
-
-
     }, [lastPosition, mouseDown, color, setPosition, brushSize, compositeMode, transparency])
 
+    //paint function
     const paint = useCallback((x, y) => {
         if (color !== "#0000FF") {
             setCompositeMode("source-over");
@@ -298,24 +296,11 @@ export default function CanvasII() {
     }
         , [lastPosition, mouseDown, color, setPosition, brushSize, compositeMode, transparency])
 
-    // const undo = () => {
-    //     setHistory(paths.filter(lastpath));
-    // }
-
-    // const download = async () => {
-    //     const image = canvasRef.current.toDataURL('image/png');
-    //     const blob = await (await fetch(image)).blob();
-    //     const blobURL = URL.createObjectURL(blob);
-    //     const link = document.createElement('a');
-    //     link.href = blobURL;
-    //     link.download = "image.png";
-    //     link.click();
-    // }
-
+    //clear function
     const clear = () => {
         ctx2.current.clearRect(0, 0, ctx2.current.canvas.width, ctx2.current.canvas.height)
     }
-
+    //draw functions
     const onMouseDown = (e) => {
         setPosition({
             x: e.nativeEvent.offsetX,
@@ -336,7 +321,7 @@ export default function CanvasII() {
     const onMouseMove = (e) => {
         paint(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
     }
-
+    // brush settings
     const setBrushSmall = () => {
         setBrushSize(12);
     }
@@ -348,7 +333,7 @@ export default function CanvasII() {
     const setBrushLarge = () => {
         setBrushSize(50);
     }
-
+    //transparency settings
     const selectTransparency = (event, newValue) => {
         setValue(newValue);
         console.log(newValue);
@@ -357,10 +342,28 @@ export default function CanvasII() {
         setTransparency(transparencyStops[i].hexValue);
     }
 
+    // export canvas data and send to UploadForm
+    function setFiles() {
+        console.log('call from UploadForm')
+        let photoData = canvasRef.current.toDataURL('image/png');
+        console.log('photoData:', photoData);
+        let annotationData = canvasRef2.current.toDataURL('image/png');
+        console.log('annotationData:', annotationData);
+        props.imgFiles(photoData, annotationData);
+    }
+
+    //is it correct or should it be async?
+    useEffect(() => {
+        if (props.trigger) {
+            setFiles();
+            console.log('sending files to UploadForm')
+        }
+    }, [props.trigger])
 
     if (canvasImage) {
         return (
             <div >
+                {/* load canvas */}
                 <Typography>
                     Upload a picture and make a <b>collage</b> using your photograph and our painting tool!
                     <br />
@@ -390,6 +393,7 @@ export default function CanvasII() {
                     />
                 </div>
                 <br />
+                {/* painting tools */}
                 <Grid container justifyContent="center" flexDirection="column" alignItems="center"
                     spacing={0}>
                     <Grid item xs={11} >

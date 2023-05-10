@@ -12,7 +12,7 @@ export default function TextForm(props) {
     const [text, setText] = React.useState(null);
     const [highlighter, setHighlighter] = React.useState(false);
     const [highlights, setHighlights] = React.useState([]);
-    const [hashtag, setHashtag] = React.useState([]);
+    const [tags, setTags] = React.useState([]);
     const [home, setHome] = React.useState(true);
     const [solidarity, setSolidarity] = React.useState(true);
     const [wellbeing, setWellbeing] = React.useState(true);
@@ -37,7 +37,6 @@ export default function TextForm(props) {
         borderRadius: "5px",
         padding: "10px 10px 10px 10px"
     }
-
 
     var style4 = {
         marginTop: "10px",
@@ -79,40 +78,41 @@ export default function TextForm(props) {
     const enteredText = (event) => {
         setText(event.target.value);
         // console.log(event.target.value);
-
     }
 
     const removeTags = (index) => {
-        setHashtag([...hashtag.filter((word) => hashtag.indexOf(word) !== index)]);
+        setTags([...tags.filter((word) => tags.indexOf(word) !== index)]);
     };
 
-    const selectionHandler = (selected, startIndex, numChars) => {
+    const selectionHandler = (selected, startIndex, numChars, props) => {
         console.log(selected);
-        setHashtag([...hashtag, selected]);
+        setTags([...tags, selected]);
         highlights.push({ startIndex: startIndex, numChars: numChars });
         setHighlights(highlights);
+        //send tags to UploadForm
+        props.selectedTags([...tags, selected]);
     }
 
     const enableHighlighter = () => {
         setHighlighter(true);
     }
 
-    const addHomeHashtag = () => {
+    const addHomeTag = () => {
         setHome(false);
-        hashtag.push("home");
-        setHashtag(hashtag);
+        tags.push("home");
+        setTags(tags);
     };
 
-    const addSolidarityHashtag = () => {
+    const addSolidarityTag = () => {
         setSolidarity(false);
-        hashtag.push("solidarity")
-        setHashtag(hashtag)
+        tags.push("solidarity")
+        setTags(tags)
     };
 
-    const addWellbeingHashtag = () => {
+    const addWellbeingTag = () => {
         setWellbeing(false);
-        hashtag.push("well-being")
-        setHashtag(hashtag)
+        tags.push("well-being")
+        setTags(tags)
     };
 
     return (
@@ -131,7 +131,7 @@ export default function TextForm(props) {
                             />
                         </div>
                         <div style={style4}>
-                            {hashtag.map((word, index) => (
+                            {tags.map((word, index) => (
                                 <Chip
                                     avatar={<Avatar style={style6}><b>#</b></Avatar>}
                                     className="tags-chip"
@@ -154,7 +154,7 @@ export default function TextForm(props) {
                                     label="home"
                                     style={style7}
                                     variant="filled"
-                                    onClick={addHomeHashtag}
+                                    onClick={addHomeTag}
                                 />}
 
                             {solidarity &&
@@ -163,7 +163,7 @@ export default function TextForm(props) {
                                     label="solidarity"
                                     style={style7}
                                     variant="filled"
-                                    onClick={addSolidarityHashtag}
+                                    onClick={addSolidarityTag}
                                 />}
 
                             {wellbeing &&
@@ -172,7 +172,7 @@ export default function TextForm(props) {
                                     label="well-being"
                                     style={style7}
                                     variant="filled"
-                                    onClick={addWellbeingHashtag}
+                                    onClick={addWellbeingTag}
                                 />}
                         </div>
                     </div>
