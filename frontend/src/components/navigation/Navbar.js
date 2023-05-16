@@ -54,7 +54,7 @@ export default function Navbar() {
                     <MDBCollapse navbar show={showNavExternal}>
                         <MDBNavbarNav>
                             {/* <MDBNavbarLink href='/login'>Login</MDBNavbarLink> */}
-                            <MDBNavbarLink href='/success'>Success</MDBNavbarLink>
+                            <MDBNavbarLink href='/Login'>Login</MDBNavbarLink>
                         </MDBNavbarNav>
                     </MDBCollapse>
                 </MDBContainer>
