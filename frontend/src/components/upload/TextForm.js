@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Chip from "@mui/material/Chip";
 import Avatar from '@mui/material/Avatar';
-import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { createTheme, ThemeProvider } from '@mui/system'
 import { InteractiveHighlighter } from 'react-interactive-highlighter';
 import './TextForm.css';
 
@@ -77,13 +77,14 @@ export default function TextForm(props) {
 
     const enteredText = (event) => {
         setText(event.target.value);
-        // console.log(event.target.value);
+        console.log(event.target.value);
     }
 
     const removeTags = (index) => {
         setTags([...tags.filter((word) => tags.indexOf(word) !== index)]);
     };
 
+    //should I use props.tags instead here?
     const selectionHandler = (selected, startIndex, numChars, props) => {
         console.log(selected);
         setTags([...tags, selected]);
@@ -180,7 +181,7 @@ export default function TextForm(props) {
                     <div>
                         <Typography>Write about your memory. Then, highlight the important words.</Typography>
                         <ThemeProvider theme={theme}>
-                            <TextField
+                            {/* <TextField
                                 id="filled-multiline-static"
                                 label="My Memory"
                                 multiline={true}
@@ -188,6 +189,16 @@ export default function TextForm(props) {
                                 variant="filled"
                                 margin="normal"
                                 fullWidth="true"
+                                onChange={enteredText}
+                            /> */}
+                            <TextField
+                                id="filled-multiline-static"
+                                label="My Memory"
+                                multiline={true}
+                                rows={18}
+                                variant="filled"
+                                margin="normal"
+                                fullWidth={true}
                                 onChange={enteredText}
                             />
                         </ThemeProvider>
