@@ -1,15 +1,9 @@
 import React, { useEffect, useRef, useCallback } from 'react';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Slider from '@mui/material/Slider';
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
-import Chip from '@mui/material/Chip';
+
+import { createTheme, Grid, Typography, ThemeProvider, Button, ButtonGroup, Slider, Box, Chip, Avatar } from '@mui/material';
+
 // import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Grid from '@mui/material/Grid';
 
 import RubberIcon from "../../pics/RubberIcon.jpg";
 import Palette from './Palette';
@@ -52,7 +46,7 @@ export default function CanvasII(props) {
     });
     const [canvasImage, setCanvasImage] = React.useState(null);
     const [brushSize, setBrushSize] = React.useState(25);
-    const [transparency, setTransparency] = React.useState('FF');
+    const [transparency, setTransparency] = React.useState('0xFF');
     const [value, setValue] = React.useState(100);
     const [compositeMode, setCompositeMode] = React.useState(null);
     // const [history, setHistory] = React.useState();
@@ -339,18 +333,18 @@ export default function CanvasII(props) {
         console.log(newValue);
         let i = transparencyStops.findIndex(t => t.value === newValue);
         console.log('index:' + i);
-        setTransparency(transparencyStops[i].hexValue);
+        setTransparency("0x" + transparencyStops[i].hexValue);
     }
 
     // export canvas data and send to UploadForm
-    function setFiles() {
+    const setFiles = useCallback(() => {
         console.log('call from UploadForm')
         let photoData = canvasRef.current.toDataURL('image/png');
         console.log('photoData:', photoData);
         let annotationData = canvasRef2.current.toDataURL('image/png');
         console.log('annotationData:', annotationData);
         props.imgFiles(photoData, annotationData);
-    }
+    }, [props]);
 
     //is it correct or should it be async?
     useEffect(() => {
@@ -358,7 +352,7 @@ export default function CanvasII(props) {
             setFiles();
             console.log('sending files to UploadForm')
         }
-    }, [props.trigger])
+    }, [props.trigger, setFiles])
 
     if (canvasImage) {
         return (
@@ -430,7 +424,7 @@ export default function CanvasII(props) {
                                             valueLabelDisplay="auto"
                                             onChange={selectTransparency}
                                             value={value}
-                                            defaultValue={transparency}
+                                            defaultValue={100(transparency)}
                                         />
                                     </Box>
                                 </ThemeProvider>
