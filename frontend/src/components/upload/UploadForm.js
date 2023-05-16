@@ -4,12 +4,7 @@ import axios from "axios";
 import CanvasII from "./CanvasII";
 import TextForm from "./TextForm";
 
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import { ThemeProvider, useTheme } from '@mui/styles';
-import Typography from '@mui/material/Typography';
-import CircularProgress from '@mui/material/CircularProgress';
+import { ThemeProvider, useTheme, Grid, Stack, Button, Typography, CircularProgress } from '@mui/material';
 
 export default function UploadForm() {
     const [post, setPost] = React.useState(false);
@@ -63,7 +58,7 @@ export default function UploadForm() {
     const readiedFiles = (photoData, annotationData) => {
         console.log("receiving files from CanvasII");
         console.log("photodata:", photoData, "annotationData:", annotationData);
-        // setFiles(photoData, annotationData);
+        setFiles(photoData, annotationData);
     };
 
     const enteredText = (text) => {
