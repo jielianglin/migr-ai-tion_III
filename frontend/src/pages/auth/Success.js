@@ -16,7 +16,7 @@ export default function Success() {
     useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
             setSession(session)
-        })
+        });
 
         const {
             data: { subscription },
@@ -28,11 +28,10 @@ export default function Success() {
     }, [])
 
     if (!session) {
-        return (
-            <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />
-        )
+        return (<Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />)
     }
-    else {
+    else 
+    {
         return (<div>Logged in!</div>)
     }
 }

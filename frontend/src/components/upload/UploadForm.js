@@ -4,12 +4,8 @@ import axios from "axios";
 import CanvasII from "./CanvasII";
 import TextForm from "./TextForm";
 
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import { ThemeProvider, useTheme } from '@mui/styles';
-import Typography from '@mui/material/Typography';
-import CircularProgress from '@mui/material/CircularProgress';
+// NEW:
+import { ThemeProvider, useTheme, Grid, Stack, Button, Typography, CircularProgress } from '@mui/material';
 
 export default function UploadForm() {
     const [post, setPost] = React.useState(false);

@@ -1,15 +1,7 @@
 import React, { useEffect, useRef, useCallback } from 'react';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Slider from '@mui/material/Slider';
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
-import Chip from '@mui/material/Chip';
-// import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
+import {createTheme, Grid, Typography, ThemeProvider, Button, ButtonGroup, Slider, Box, Chip, Avatar} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Grid from '@mui/material/Grid';
 
 import RubberIcon from "../../pics/RubberIcon.jpg";
 import Palette from './Palette';
@@ -52,7 +44,7 @@ export default function CanvasII(props) {
     });
     const [canvasImage, setCanvasImage] = React.useState(null);
     const [brushSize, setBrushSize] = React.useState(25);
-    const [transparency, setTransparency] = React.useState('FF');
+    const [transparency, setTransparency] = React.useState('0xFF');
     const [value, setValue] = React.useState(100);
     const [compositeMode, setCompositeMode] = React.useState(null);
     // const [history, setHistory] = React.useState();
@@ -298,7 +290,8 @@ export default function CanvasII(props) {
 
     //clear function
     const clear = () => {
-        ctx2.current.clearRect(0, 0, ctx2.current.canvas.width, ctx2.current.canvas.height)
+        // ctx2.current.clearRect(0, 0, ctx2.current.canvas.width, ctx2.current.canvas.height)
+        console.log("clear");
     }
     //draw functions
     const onMouseDown = (e) => {
@@ -339,7 +332,7 @@ export default function CanvasII(props) {
         console.log(newValue);
         let i = transparencyStops.findIndex(t => t.value === newValue);
         console.log('index:' + i);
-        setTransparency(transparencyStops[i].hexValue);
+        setTransparency("0x" + transparencyStops[i].hexValue);
     }
 
     // export canvas data and send to UploadForm
@@ -358,7 +351,7 @@ export default function CanvasII(props) {
             setFiles();
             console.log('sending files to UploadForm')
         }
-    }, [props.trigger])
+    })
 
     if (canvasImage) {
         return (
@@ -430,7 +423,7 @@ export default function CanvasII(props) {
                                             valueLabelDisplay="auto"
                                             onChange={selectTransparency}
                                             value={value}
-                                            defaultValue={transparency}
+                                            defaultValue={Number(transparency)}
                                         />
                                     </Box>
                                 </ThemeProvider>
@@ -438,7 +431,7 @@ export default function CanvasII(props) {
                         </div>
                     </Grid>
                     <Grid item xs={11}  >
-                        <div classname="columnThree" style={style14}>
+                        <div className="columnThree" style={style14}>
                             <div className="erase">
                                 <ThemeProvider theme={theme}>
                                     <Chip style={style11} avatar={<Avatar alt="erase" src={RubberIcon} />} label="Erase" onClick={erase} />

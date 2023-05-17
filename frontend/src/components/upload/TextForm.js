@@ -187,7 +187,7 @@ export default function TextForm(props) {
                                 rows={18}
                                 variant="filled"
                                 margin="normal"
-                                fullWidth="true"
+                                fullWidth={true}
                                 onChange={enteredText}
                             />
                         </ThemeProvider>

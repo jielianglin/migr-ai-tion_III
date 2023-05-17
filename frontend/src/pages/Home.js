@@ -121,8 +121,6 @@ export default function Home() {
             return (
                 <div style={style1}>
                     <div style={style16}>
-
-
                         <Typography variant="h7" className="introText">
                             This is demo of a Computer Vision machine teaching UI, that members from diverse communities
                             can use to co-create synthetic data in order to represent themselves in datasets.
