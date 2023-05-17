@@ -7,7 +7,7 @@ import TextForm from "./TextForm";
 // NEW:
 import { ThemeProvider, useTheme, Grid, Stack, Button, Typography, CircularProgress } from '@mui/material';
 
-export default function UploadForm() {
+export default function UploadForm({supabase}) {
     const [post, setPost] = React.useState(false);
     const [files, setFiles] = React.useState(null);
     const [tags, setTags] = React.useState([]);
@@ -59,7 +59,22 @@ export default function UploadForm() {
     const readiedFiles = (photoData, annotationData) => {
         console.log("receiving files from CanvasII");
         console.log("photodata:", photoData, "annotationData:", annotationData);
-        // setFiles(photoData, annotationData);
+        setFiles(photoData, annotationData);
+
+        let formData = new FormData();
+        // //is this correct?
+        formData.append("image", photoData);
+
+
+        // console.log(formData.get("image"));
+
+        supabase.storage.from('images').upload("photos", formData.image).then((result) => {
+            if(result.error){
+                console.log(result.error);  
+            } else {
+                console.log("Data: ", result.data);
+            }
+        })
     };
 
     const enteredText = (text) => {
@@ -69,28 +84,33 @@ export default function UploadForm() {
         setTags(tags);
     };
 
-    async function postData() {
-        setTrigger(!trigger);
-        setProgress(true);
-        console.log(tags);
-        console.log(tags.join(","));
+    const postData = () => {
 
-        let formData = new FormData();
-        //is this correct?
-        formData.append("files", files);
-        formData.append("text", text);
-        formData.append("tags", tags.join(","));
-        let response = await axios.post("http://localhost:8000/images", formData);
+        console.log(trigger);
+        setTrigger(!trigger);
+        console.log(trigger);
+        // setProgress(true);
+
+        console.log("UPLOAD");
+
+        // console.log(files[0]);
+
+        // let formData = new FormData();
+        // //is this correct?
+        // formData.append("files", files);
+        // formData.append("text", text);
+        // formData.append("tags", tags.join(","));
+        // let response = await axios.post("http://localhost:8000/images", formData);
         // props.newTitle();
-        setSrc(`http://localhost:8000/images/${response.data.id}.jpeg`);
-        console.log(response.data.text);
+        // setSrc(`http://localhost:8000/images/${response.data.id}.jpeg`);
+        // console.log(response.data.text);
         // setReturnCaption(response.data.caption);
         // console.log(response.data.tags);
         // setReturnTags(response.data.tags);
         // console.log(response.data.ai_tags);
         // setReturnAITags(response.data.ai_tags || []);
-        setPost(true);
-        setProgress(false);
+        // setPost(true);
+        // setProgress(false);
     }
 
     if (post) {

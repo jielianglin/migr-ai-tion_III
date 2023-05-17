@@ -336,7 +336,7 @@ export default function CanvasII(props) {
     }
 
     // export canvas data and send to UploadForm
-    function setFiles() {
+    const setFiles = () => {
         console.log('call from UploadForm')
         let photoData = canvasRef.current.toDataURL('image/png');
         console.log('photoData:', photoData);
@@ -347,6 +347,7 @@ export default function CanvasII(props) {
 
     //is it correct or should it be async?
     useEffect(() => {
+        console.log("canvas: ", props.trigger);
         if (props.trigger) {
             setFiles();
             console.log('sending files to UploadForm')

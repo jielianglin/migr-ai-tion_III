@@ -72,12 +72,12 @@ var style17 = {
     borderRadius: '15px',
 }
 
-export default function Home() {
+
+export default function Home({supabase}) {
     const [discoveryMode, setDiscoveryMode] = React.useState(false);
     const [uploadMode, setUploadMode] = React.useState(false);
     const [anchorElUpload, setAnchorElUpload] = React.useState(null);
     const [anchorElDiscover, setAnchorElDiscover] = React.useState(null);
-
 
     const showUpload = () => {
         setUploadMode(true);
@@ -110,7 +110,7 @@ export default function Home() {
 
 
     if (uploadMode) {
-        return <UploadForm />
+        return <UploadForm supabase={supabase}/>
     } else {
         if (discoveryMode) {
 
